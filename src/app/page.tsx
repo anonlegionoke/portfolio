@@ -1,103 +1,128 @@
-import Image from "next/image";
+"use client";
 
+import { House, PanelsTopLeft, ChartNoAxesGantt, Handshake, Tally1, Sun, Moon } from 'lucide-react';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import Carousal from './carousal/page';
+import EnterAnimation from './carousal/enter-animation/EnterAnimation';
+import ImageCarousel from './carousal/image-carousel/ImageCarousel';
 export default function Home() {
+  const [theme, setTheme] = useState('light');
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+    <main className="relative min-h-screen overflow-hidden">
+      {/* Background gradient with blur effect */}
+      <div className="fixed inset-0 -z-10 bg-gradient-to-br from-blue-500/30 via-purple-500/20 to-pink-500/30" style={{ backdropFilter: 'blur(100px)' }} />
+      
+      {/* Animated background circles with motion effects */}
+      <motion.div 
+        className="fixed top-20 left-20 w-[500px] h-[500px] rounded-full bg-blue-400/20 blur-3xl -z-10" 
+        animate={{ 
+          x: [0, 30, 0], 
+          y: [0, 15, 0],
+          scale: [1, 1.05, 1]
+        }}
+        transition={{ 
+          repeat: Infinity, 
+          duration: 20,
+          ease: "easeInOut"
+        }}
+      />
+      <motion.div 
+        className="fixed bottom-20 right-20 w-[600px] h-[600px] rounded-full bg-purple-400/20 blur-3xl -z-10" 
+        animate={{ 
+          x: [0, -20, 0], 
+          y: [0, -20, 0],
+          scale: [1, 1.03, 1]
+        }}
+        transition={{ 
+          repeat: Infinity, 
+          duration: 15,
+          ease: "easeInOut"
+        }}
+      />
+      <motion.div 
+        className="fixed top-1/2 left-1/3 w-[400px] h-[400px] rounded-full bg-pink-400/20 blur-3xl -z-10" 
+        animate={{ 
+          x: [0, 15, 0], 
+          y: [0, -25, 0],
+          scale: [1, 1.08, 1]
+        }}
+        transition={{ 
+          repeat: Infinity, 
+          duration: 25,
+          ease: "easeInOut"
+        }}
+      />
+      <motion.div 
+        className="h-16 flex justify-center items-center backdrop-blur-md sticky top-0 z-50"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <motion.div 
+          className="border border-white/30 flex items-center justify-between gap-4 mx-auto
+          rounded-full py-0.5 px-1 bg-black/10 backdrop-blur-md"
+          whileHover={{ boxShadow: "0 0 15px rgba(255, 255, 255, 0.2)" }}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          <button className='flex items-center py-2 px-4 rounded-full cursor-pointer hover:bg-white/10 transition-colors bg-white/20'>
+            <House className='w-5 h-5'/>
+          </button>
+          <Tally1 />
+          <button className='flex items-center py-2 px-4 rounded-full cursor-pointer hover:bg-white/10 transition-colors'>
+            <PanelsTopLeft className='w-5 h-5'/>
+            <span className='ml-2 text-sm'>Projects</span>
+          </button>
+          <button className='flex items-center py-2 px-4 rounded-full cursor-pointer hover:bg-white/10 transition-colors'>
+            <ChartNoAxesGantt className='w-5 h-5'/>
+            <span className='ml-2 text-sm'>Experience</span>
+          </button>
+          <button className='flex items-center py-2 px-4 rounded-full cursor-pointer hover:bg-white/10 transition-colors'>
+            <Handshake className='w-5 h-5'/>
+            <span className='ml-2 text-sm'>Connect</span>
+          </button>
+          <Tally1 />
+          <button className='flex items-center py-2 px-3 -ml-6 rounded-full cursor-pointer hover:bg-white/10 transition-colors' onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+            {theme === 'light' ? <Sun className='w-5 h-5'/> : <Moon className='w-5 h-5'/>}
+          </button>
+        </motion.div>
+      </motion.div>
+      <div className="flex justify-between items-center p-20 mt-8">
+        <motion.div 
+          className="backdrop-blur-md bg-white/10 p-8 rounded-2xl shadow-xl border border-white/20 max-w-2xl"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          <h1 className="text-7xl font-bold text-white drop-shadow-md">Hi, I'm Sabir</h1>
+          <h4 className="text-xl font-bold mt-8 text-white/90 drop-shadow-sm">About Me</h4>
+          <p className="text-md text-white/80 leading-relaxed">I'm a software developer with a strong passion for building efficient, scalable, and user-friendly applications. With experience across both frontend and backend technologies, I enjoy crafting clean code and solving complex problems. My work spans from developing dynamic web interfaces to designing robust APIs and integrating third-party services. I'm always eager to learn new tools and frameworks, and I thrive in collaborative, fast-paced environments where innovation meets real-world impact.  
+          </p>
+          <div className="flex gap-4 mt-8">
+            <motion.button 
+              className="bg-white text-black cursor-pointer hover:bg-white/70 transition-all py-2 px-6 rounded-full font-medium shadow-lg"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Resume
+            </motion.button>
+            <motion.button 
+              className="bg-transparent text-white border border-white/50 cursor-pointer hover:bg-white/10 transition-all py-2 px-6 rounded-full font-medium shadow-lg"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Get in touch
+            </motion.button>
+          </div>
+        </motion.div>
+        <motion.div 
+          className="relative backdrop-blur-sm bg-white/5 p-19 rounded-2xl shadow-xl border border-white/10"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          <ImageCarousel />
+        </motion.div>
+      </div>
+    </main>
   );
 }
