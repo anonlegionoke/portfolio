@@ -3,17 +3,19 @@
 import { House, PanelsTopLeft, ChartNoAxesGantt, Handshake, Tally1, Sun, Moon } from 'lucide-react';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import Carousal from './carousal/page';
-import EnterAnimation from './carousal/enter-animation/EnterAnimation';
-import ImageCarousel from './carousal/image-carousel/ImageCarousel';
+import ImageCarousel from './components/ImageCarousel';
+import AnimatedIconsFlow from './components/AnimatedIconsFlow';
+import Project from './components/Project';
+import Connect from './components/Connect';
+import Experience from './components/Experience';
+import TechStack from './components/TechStack';
+
 export default function Home() {
   const [theme, setTheme] = useState('light');
   return (
     <main className="relative min-h-screen overflow-hidden">
-      {/* Background gradient with blur effect */}
       <div className="fixed inset-0 -z-10 bg-gradient-to-br from-blue-500/30 via-purple-500/20 to-pink-500/30" style={{ backdropFilter: 'blur(100px)' }} />
       
-      {/* Animated background circles with motion effects */}
       <motion.div 
         className="fixed top-20 left-20 w-[500px] h-[500px] rounded-full bg-blue-400/20 blur-3xl -z-10" 
         animate={{ 
@@ -86,9 +88,9 @@ export default function Home() {
           </button>
         </motion.div>
       </motion.div>
-      <div className="flex justify-between items-center p-20 mt-8">
+      <div className="flex justify-between items-center px-10 mt-25 gap-5">
         <motion.div 
-          className="backdrop-blur-md bg-white/10 p-8 rounded-2xl shadow-xl border border-white/20 max-w-2xl"
+          className="backdrop-blur-md bg-white/10 p-8  rounded-2xl shadow-xl border border-white/20 w-[70%]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -115,13 +117,26 @@ export default function Home() {
           </div>
         </motion.div>
         <motion.div 
-          className="relative backdrop-blur-sm bg-white/5 p-19 rounded-2xl shadow-xl border border-white/10"
+          className="relative backdrop-blur-sm bg-white/5 p-10 rounded-2xl shadow-xl border border-white/10 w-[30%]"
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
           <ImageCarousel />
         </motion.div>
+      </div>
+      <div className="px-10 my-20">
+        <AnimatedIconsFlow />
+        <TechStack />
+      </div>
+      <div className="px-10 my-20">
+        <Project />
+      </div>
+      <div className="px-10 my-20">
+        <Experience />
+      </div>
+      <div className="px-10 my-20">
+        <Connect />
       </div>
     </main>
   );

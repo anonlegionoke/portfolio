@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// Using placeholder images with different colors instead of beach images
 const placeholderImages = [
   'https://static.vecteezy.com/system/resources/previews/000/259/360/non_2x/vector-minimal-beach-landscape.jpg',
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTciAYuz8mxO8V_0fH0iBl19S9e3rIMnvnucw&s',
@@ -15,26 +14,23 @@ const placeholderImages = [
 export default function ImageCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Start the carousel immediately and continue with automatic rotation
-  useEffect(() => {
-    // Start immediately
-    const startImmediately = setTimeout(() => {
-      setCurrentIndex(1); // Move to second image immediately after mount
-    }, 100);
+  // useEffect(() => {
+  //   const startImmediately = setTimeout(() => {
+  //     setCurrentIndex(1); 
+  //   }, 100);
     
-    // Continue with automatic rotation
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % placeholderImages.length);
-    }, 3000);
+  //   const interval = setInterval(() => {
+  //     setCurrentIndex((prevIndex) => (prevIndex + 1) % placeholderImages.length);
+  //   }, 3000);
 
-    return () => {
-      clearTimeout(startImmediately);
-      clearInterval(interval);
-    };
-  }, []);
+  //   return () => {
+  //     clearTimeout(startImmediately);
+  //     clearInterval(interval);
+  //   };
+  // }, []);
 
   return (
-    <div className="relative w-[400px] h-[300px] overflow-hidden rounded-lg">
+    <div className="relative h-[320px] overflow-hidden rounded-lg">
       {/* Blurred background */}
       <div 
         className="absolute inset-0 w-full h-full" 
