@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, PanInfo } from "framer-motion"
 import { useState, useEffect, useRef } from "react"
 import { ArrowLeft, ArrowRight, ExternalLink, Github, SquareArrowOutUpRight } from "lucide-react"
 import { usePerformance } from "../context/PerformanceContext"
@@ -17,31 +17,76 @@ const Project = () => {
   const projects: ProjectData[] = [
     {
       id: 1,
-      name: "AI RAG Chat App",
-      description: "A modern portfolio website built with Next.js and Framer Motion for smooth animations and transitions.",
-      screenshot: "https://static.vecteezy.com/system/resources/previews/000/259/360/non_2x/vector-minimal-beach-landscape.jpg",
-      liveLink: "https://portfolio.example.com",
-      githubLink: "https://github.com/username/portfolio",
-      techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"]
+      name: "Chat with AI-RAG",
+      description: "A modern, interactive chat application built with Next.js that demonstrates various AI conversation modes including Retrieval-Augmented Generation (RAG) capabilities.",
+      screenshot: "/screenshots/ai-rag-chat-1.png",
+      liveLink: undefined,
+      githubLink: "https://github.com/anonlegionoke/Chat-with-AI-RAG",
+      techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "LangChain", "Gemini"]
     },
     {
       id: 2,
-      name: "E-commerce Platform",
-      description: "A full-featured e-commerce platform with product catalog, cart functionality, and payment integration.",
-      screenshot: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTciAYuz8mxO8V_0fH0iBl19S9e3rIMnvnucw&s",
-      liveLink: "https://ecommerce.example.com",
-      githubLink: "https://github.com/username/ecommerce",
-      techStack: ["React", "Node.js", "MongoDB", "Express", "Stripe API"]
+      name: "Crypto Gate",
+      description: "A secure Solana-based crypto payment gateway where merchants can accept any token and settle in USDC via Jupiter swap integration.",
+      screenshot: "/screenshots/crypto-gate.png",
+      liveLink: undefined,
+      githubLink: "https://github.com/anonlegionoke/crypto-pay-gateway",
+      techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Jupiter", "Solana", "PostgreSQL", "Prisma", "JWT"]
     },
     {
       id: 3,
-      name: "Weather Dashboard",
-      description: "Real-time weather application with location-based forecasts and interactive visualizations.",
-      screenshot: "https://i.redd.it/c6f8zkx8ef3b1.jpg",
-      liveLink: "https://weather.example.com",
-      githubLink: "https://github.com/username/weather-app",
-      techStack: ["JavaScript", "React", "OpenWeather API", "Chart.js", "CSS3"]
-    }
+      name: "Blog App",
+      description: "A React-based blog app powered by Appwrite, featuring rich text editing, image uploads, post management, and user authentication with synced access across devices.",
+      screenshot: "/screenshots/blog-app.png",
+      liveLink: undefined,
+      githubLink: "https://github.com/anonlegionoke/react/tree/main/11blogapp",
+      techStack: ["React", "TypeScript", "Tailwind CSS", "Appwrite", "TinyMCE", ]
+    },
+    {
+      id: 4,
+      name: "Movie Review App",
+      description: "A movie review app using the TMDb API, allowing users to browse movies, search titles, read and contribute reviews with full create, update, and delete support.",
+      screenshot: "/screenshots/movie-review-app.png",
+      liveLink: undefined,
+      githubLink: "https://github.com/anonlegionoke/Blockbuster-Review-App",
+      techStack: ["JavaScript", "HTML", "CSS", "Node.js", "Express", "MongoDB"] 
+    },
+    {
+      id: 5,
+      name: "Todo Lister",
+      description: "Console Todo App in C++ that generates a random ID for each task, allowing users to add and mark tasks as completed using their unique IDs.",
+      screenshot: "/screenshots/todo-lister.png",
+      liveLink: undefined,
+      githubLink: "https://github.com/anonlegionoke/Console-Todo",
+      techStack: ["C++"]
+    },
+    {
+      id: 6,
+      name: "Blockbuster | The Movie Store",
+      description: "Landing page for the Blockbuster Movie Store website if they were still around today.",
+      screenshot: "/screenshots/blockbuster.png",
+      liveLink: undefined,
+      githubLink: "https://github.com/anonlegionoke/Blockbuster",
+      techStack: ["HTML", "CSS", "JavaScript"] 
+    },
+    {
+      id: 7,
+      name: "Greeting on Panel",
+      description: "A simple and efficient extension to display greetings based on time of the day on the GNOME desktop environment top panel.",
+      screenshot: "/screenshots/gnome-extension.png",
+      liveLink: undefined,
+      githubLink: "https://github.com/anonlegionoke/greetings-on-panel",
+      techStack: ["JavaScript", "Gnome-Shell"]
+    },
+    {
+      id: 8,
+      name: "Loop Texts on Panel",
+      description: "A customizable GNOME extension that displays any text—such as reminders or quick notes—on the top panel, with support for looping messages for continuous visibility.",
+      screenshot: "/screenshots/gnome-extension.png",
+      liveLink: undefined,
+      githubLink: "https://github.com/anonlegionoke/loop-texts-on-panel",
+      techStack: ["JavaScript", "Gnome-Shell"]
+    } 
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -49,6 +94,16 @@ const Project = () => {
   const [direction, setDirection] = useState(0); // -1 for left, 1 for right
   const containerRef = useRef<HTMLDivElement>(null);
   const { performanceMode } = usePerformance();
+
+  const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+    if (Math.abs(info.offset.x) > 10) {
+      if (info.offset.x > 0) {
+        goToPrevious();
+      } else {
+        goToNext();
+      }
+    }
+  };
 
   const goToPrevious = () => {
     setDirection(-1);
@@ -153,16 +208,21 @@ const Project = () => {
                 opacity: { duration: 0.2 }
               }}
               className="flex flex-col md:flex-row gap-8 p-6 bg-black/20 rounded-xl border border-white/10 absolute top-0 left-0 right-0 w-full"
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={1}
+              dragTransition={{ bounceStiffness: 100, bounceDamping: 5 }}
+              onDragEnd={handleDragEnd}
             >
               {/* Screenshot Area */}
               <div className="w-full md:w-1/2 relative overflow-hidden rounded-lg border border-white/10">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
-                <div className="w-full h-[300px] bg-gray-800 flex items-center justify-center">
+                <div className="w-full h-[200px] md:h-[300px] lg:h-[300px] bg-gray-800 flex items-center justify-center">
                   {currentProject.screenshot ? (
                     <img 
                       src={currentProject.screenshot} 
                       alt={`${currentProject.name} screenshot`} 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain md:object-cover lg:object-cover"
                     />
                   ) : (
                     <div className="text-white/50">Screenshot</div>
@@ -181,7 +241,9 @@ const Project = () => {
                     <p className="text-white/80">{currentProject.description}</p>
                     <br />
                     <div className="flex gap-4">
-                      <a href={currentProject.liveLink} target="_blank" rel="noopener noreferrer" className="hover:underline text-xs flex items-center gap-1 border border-white/10 rounded-xl p-1 text-white"><SquareArrowOutUpRight size={12} />Live</a>
+                      {currentProject.liveLink && (
+                        <a href={currentProject.liveLink} target="_blank" rel="noopener noreferrer" className="hover:underline text-xs flex items-center gap-1 border border-white/10 rounded-xl p-1 text-white"><SquareArrowOutUpRight size={12} />Live</a>
+                      )}
                       <a href={currentProject.githubLink} target="_blank" rel="noopener noreferrer" className="hover:underline text-xs flex items-center gap-1 border border-white/10 rounded-xl p-1 text-white"><Github size={12} />Source Code</a>
                     </div>
                   </div>

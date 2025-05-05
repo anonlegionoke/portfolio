@@ -170,6 +170,14 @@ export default function Home() {
               className="bg-transparent text-white border border-white/50 cursor-pointer hover:bg-white/10 transition-all py-2 px-4 md:px-6 rounded-full font-medium shadow-lg"
               whileHover={performanceMode === 'full' ? { scale: 1.05 } : {}}
               whileTap={performanceMode === 'full' ? { scale: 0.95 } : {}}
+              onClick={() => {
+                const link = document.createElement('a');
+                link.href = '/data/SabirResume-06-24.pdf';
+                link.download = 'Sabir_Resume.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              }}
             >
               Resume
             </motion.button>
