@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { useState, useEffect, useRef } from "react"
-import { ArrowLeft, ArrowRight, ExternalLink, Github } from "lucide-react"
+import { ArrowLeft, ArrowRight, ExternalLink, Github, SquareArrowOutUpRight } from "lucide-react"
+import { usePerformance } from "../context/PerformanceContext"
 
 interface ProjectData {
   id: number
@@ -16,7 +17,7 @@ const Project = () => {
   const projects: ProjectData[] = [
     {
       id: 1,
-      name: "Portfolio Website",
+      name: "AI RAG Chat App",
       description: "A modern portfolio website built with Next.js and Framer Motion for smooth animations and transitions.",
       screenshot: "https://static.vecteezy.com/system/resources/previews/000/259/360/non_2x/vector-minimal-beach-landscape.jpg",
       liveLink: "https://portfolio.example.com",
@@ -47,6 +48,7 @@ const Project = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [direction, setDirection] = useState(0); // -1 for left, 1 for right
   const containerRef = useRef<HTMLDivElement>(null);
+  const { performanceMode } = usePerformance();
 
   const goToPrevious = () => {
     setDirection(-1);
@@ -66,18 +68,18 @@ const Project = () => {
     setTimeout(() => setIsPaused(false), 10000); // Resume after 10 seconds
   };
 
-//   useEffect(() => {
-//     if (isPaused) return;
+  useEffect(() => {
+    if (isPaused || performanceMode === 'light') return;
     
-//     const interval = setInterval(() => {
-//       setDirection(1);
-//       setCurrentIndex((prevIndex) => 
-//         prevIndex === projects.length - 1 ? 0 : prevIndex + 1
-//       );
-//     }, 8000);
+    const interval = setInterval(() => {
+      setDirection(1);
+      setCurrentIndex((prevIndex) => 
+        prevIndex === projects.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 8000);
     
-//     return () => clearInterval(interval);
-//   }, [currentIndex, isPaused, projects.length]);
+    return () => clearInterval(interval);
+  }, [currentIndex, isPaused, projects.length, performanceMode]);
 
   const currentProject = projects[currentIndex];
 
@@ -100,13 +102,13 @@ const Project = () => {
 
   return (
     <motion.div 
-      className="w-full overflow-hidden py-8 mt-16 backdrop-blur-sm bg-white/5 rounded-2xl shadow-xl border border-white/10"
+      className={`w-full overflow-hidden py-6 sm:py-8 mt-12 sm:mt-16 ${performanceMode === 'light' ? 'bg-black/20' : 'bg-white/5'} backdrop-blur-sm rounded-2xl shadow-xl border border-white/10 h-[800px] md:h-[550px]`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.2 }}
     >
       <motion.h2 
-        className="text-3xl font-bold text-white text-center mb-8 drop-shadow-md"
+        className="text-2xl sm:text-3xl font-bold text-white text-center mb-6 sm:mb-8 drop-shadow-md"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.3 }}
@@ -114,52 +116,26 @@ const Project = () => {
         Projects
       </motion.h2>
 
-      <div className="relative px-4 md:px-20">
+      <div className="relative px-2 sm:px-4 md:px-20 h-1/3">
         {/* Navigation Buttons */}
         <button 
           onClick={goToPrevious} 
-          className="absolute left-2 md:left-6 top-1/2 transform -translate-y-1/2 z-10 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full transition-all duration-300 cursor-pointer"
+          className="absolute left-0 sm:left-2 md:left-6 top-full transform -translate-y-1/2 z-10 bg-black/30 hover:bg-black/50 text-white p-2 sm:p-3 rounded-full transition-all duration-300 cursor-pointer"
           aria-label="Previous project"
         >
-          <ArrowLeft size={24} />
+          <ArrowLeft size={20} className="sm:w-6 sm:h-6" />
         </button>
         
         <button 
           onClick={goToNext} 
-          className="absolute right-2 md:right-6 top-1/2 transform -translate-y-1/2 z-10 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full transition-all duration-300 cursor-pointer"
+          className="absolute right-0 sm:right-2 md:right-6 top-full transform -translate-y-1/2 z-10 bg-black/30 hover:bg-black/50 text-white p-2 sm:p-3 rounded-full transition-all duration-300 cursor-pointer"
           aria-label="Next project"
         >
-          <ArrowRight size={24} />
+          <ArrowRight size={20} className="sm:w-6 sm:h-6" />
         </button>
 
         {/* Project Card with Sliding Animation */}
         <div ref={containerRef} className="relative">
-          <div className="bg-black/20 rounded-xl border border-white/10 p-6 invisible">
-            {/* This is an invisible placeholder to maintain the height */}
-            <div className="flex flex-col md:flex-row gap-8">
-              <div className="w-full md:w-1/2">
-                <div className="w-full h-[300px]"></div>
-              </div>
-              <div className="w-full md:w-1/2">
-                <div className="mb-4">
-                  <h3 className="text-xl font-bold text-white mb-2">Placeholder</h3>
-                  <p className="text-white/80">This maintains the height of the container.</p>
-                </div>
-                <div className="mb-6">
-                  <h4 className="text-lg font-semibold text-white mb-2">Tech Stack</h4>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-3 py-1 bg-white/10 rounded-full text-sm text-white/90">
-                      Placeholder
-                    </span>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="px-4 py-2 bg-blue-600 rounded-lg">Placeholder</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
           <AnimatePresence initial={false} custom={direction}>
             <motion.div 
               key={currentProject.id}
@@ -203,6 +179,11 @@ const Project = () => {
                   <div className="mb-4">
                     <h3 className="text-xl font-bold text-white mb-2">{currentProject.name}</h3>
                     <p className="text-white/80">{currentProject.description}</p>
+                    <br />
+                    <div className="flex gap-4">
+                      <a href={currentProject.liveLink} target="_blank" rel="noopener noreferrer" className="hover:underline text-xs flex items-center gap-1 border border-white/10 rounded-xl p-1 text-white"><SquareArrowOutUpRight size={12} />Live</a>
+                      <a href={currentProject.githubLink} target="_blank" rel="noopener noreferrer" className="hover:underline text-xs flex items-center gap-1 border border-white/10 rounded-xl p-1 text-white"><Github size={12} />Source Code</a>
+                    </div>
                   </div>
 
                   <div className="mb-6">
@@ -219,45 +200,19 @@ const Project = () => {
                     </div>
                   </div>
                 </div>
-
-                <div className="flex gap-4">
-                  {currentProject.liveLink && (
-                    <a 
-                      href={currentProject.liveLink} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-300"
-                    >
-                      <ExternalLink size={16} />
-                      Live Demo
-                    </a>
-                  )}
-                  {currentProject.githubLink && (
-                    <a 
-                      href={currentProject.githubLink} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-800 text-white rounded-lg transition-colors duration-300"
-                    >
-                      <Github size={16} />
-                      Source Code
-                    </a>
-                  )}
-                </div>
               </div>
             </motion.div>
           </AnimatePresence>
         </div>
-
-        {/* Pagination Indicators */}
-        <div className="flex justify-center mt-6 gap-2">
+      </div>
+      {/* Pagination Indicators */}
+      <div className="flex justify-center mt-110 md:mt-60 gap-2">
           {projects.map((_, index) => (
             <button
               key={index}
               onClick={() => {
                 setDirection(index > currentIndex ? 1 : -1);
                 setCurrentIndex(index);
-                // Pause auto-advance temporarily when user interacts
                 setIsPaused(true);
                 setTimeout(() => setIsPaused(false), 10000); // Resume after 10 seconds
               }}
@@ -268,7 +223,6 @@ const Project = () => {
             />
           ))}
         </div>
-      </div>
     </motion.div>
   )
 }
