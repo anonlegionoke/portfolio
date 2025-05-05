@@ -36,7 +36,7 @@ const Connect = () => {
     {
       name: "Twitter/X",
       icon: <Twitter size={22} />,
-      url: "https://twitter.com/sabirpm",
+      url: "https://x.com/Sabir876330",
       color: "#1DA1F2"
     },
     {
@@ -97,7 +97,7 @@ const Connect = () => {
       </motion.h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10">
-        <div>
+        <div className="md:order-1 order-2">
           <motion.h3 
             className="text-lg sm:text-xl font-semibold text-white mb-4 sm:mb-6"
             initial={{ opacity: 0, y: 20 }}
@@ -149,7 +149,7 @@ const Connect = () => {
           </motion.div>
         </div>
         
-        <div>
+        <div className="md:order-2 order-1 mb-6 md:mb-0">
           <ContactForm />
         </div>
       </div>

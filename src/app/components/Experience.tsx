@@ -8,8 +8,23 @@ interface ExperienceItem {
   company: string;
   role: string;
   duration: string;
-  description: string[];
-  projects: string[];
+  juniorRole?: {
+    title: string;
+    period: string;
+    sections: {
+      title: string;
+      items: string[];
+    }[];
+  };
+  seniorRole?: {
+    title: string;
+    period: string;
+    sections: {
+      title: string;
+      items: string[];
+    }[];
+  };
+  projects?: string[];
   technologies: string[];
   logo?: string;
 }
@@ -21,55 +36,72 @@ const Experience = () => {
       company: "Bistux Solutions Pvt. Ltd.",
       role: "Full Stack Developer",
       duration: "Jan 2024 - Present",
-      description: [
-        "Led the development of the company's flagship product using React and TypeScript",
-        "Improved application performance by 40% through code optimization and implementing lazy loading",
-        "Mentored junior developers and conducted code reviews"
-      ],
-      projects: [
-        "Customer Dashboard Redesign",
-        "Analytics Platform",
-        "Mobile App Integration"
-      ],
-      technologies: ["React", "TypeScript", "Next.js", "Tailwind CSS", "GraphQL"],
+      juniorRole: {
+        title: "Junior Software Developer",
+        period: "Jan 2024 - Jun 2024",
+        sections: [
+          {
+            title: "UI Development",
+            items: [
+              "Revamped Login and App UI for improved user experience and design consistency.",
+              "Developed interactive Dashboard using <strong>Recharts</strong> with dynamic data based on user's local timezone.",
+              "Built Timeline UI with supporting backend: database schema, REST APIs, and service logic.",
+              "Modernized legacy UI components including Call Logs, Contacts, and Call Flow."
+            ]
+          },
+          {
+            title: "Feature Implementation",
+            items: [
+              "Resolved call flow issues and improved performance using <strong>React Flow</strong>.",
+              "Implemented Campaigns Management UI for creation, tracking, and analysis.",
+              "Created reusable custom UI components: Country/State dropdowns and international phone input fields.",
+              "Developed Advanced Search UI for Contacts with robust filtering capabilities.",
+              "Managed component state using <strong>Redux</strong> for scalable state architecture."
+            ]
+          }
+        ]
+      },
+      seniorRole: {
+        title: "Full Stack Developer",
+        period: "Jun 2024 - Present",
+        sections: [
+          {
+            title: "Frontend Development",
+            items: [
+              "Built fully functional Click-to-Call UI and browser-based softphone interface for both outgoing and incoming calls.",
+              "Improved Call Flow performance by over <strong>60%</strong> and optimized rendering using <strong>React Flow</strong>.",
+              "Integrated <strong>AWS Media Services</strong> for audio processing and waveform visualizations.",
+              "Collaborated with UI/UX designers on design iterations and feedback using <strong>Figma</strong>.",
+              "Enhanced Customer Onboarding UI to improve usability and engagement metrics.",
+              "Managed advanced call state transitions using <strong>Redux</strong> for real-time call interaction handling."
+            ]
+          },
+          {
+            title: "Backend Development",
+            items: [
+              "Fixed critical bugs and rewrote logging logic for enhanced reliability and traceability.",
+              "Implemented Sticky Agent feature to optimize agent assignment and improve routing persistence.",
+              "Rewrote Campaigns backend logic to significantly improve scalability and response times.",
+              "Designed and implemented a Job Scheduler for campaign and task services with jobs running at various intervals or on customer interaction.",
+              "Achieved <strong>100%</strong> accuracy and consistency in call logging across normalized <strong>Cassandra</strong> tables, handling over <strong>100,000</strong> entries daily.",
+              "Developed efficient, scalable filtering and data consistency strategies on <strong>Cassandra</strong> across microservices.",
+              "Secured API routes and produced comprehensive API documentation for team and client usage.",
+            ]
+          },
+          {
+            title: "DevOps & Leadership",
+            items: [
+              "Mentored junior developers and contributed to sprint planning and project management.",
+              "Maintained and optimized CI/CD pipelines for reliable deployment of core services.",
+              "Managed Microservices deployments using <strong>Docker</strong> and <strong>Nginx</strong> with a focus on stability and scalability."
+            ]
+          }
+        ]
+      },
+      projects: [],
+      technologies: ["React", "TypeScript", "NodeJS", "Material UI", "Cassandra DB", "ExpressJS", "JWT", "Socket IO", "SIP.js", "AWS", "Razorpay", "NestJS", "Ngnix", "Redux", "React Flow", "Docker", "Figma"],
       logo: "/logos/tech-innovations.svg"
-    },
-    // {
-    //   id: 2,
-    //   company: "Digital Solutions Ltd.",
-    //   role: "Frontend Developer",
-    //   duration: "Mar 2021 - Dec 2022",
-    //   description: [
-    //     "Developed responsive web applications using modern JavaScript frameworks",
-    //     "Collaborated with UX/UI designers to implement pixel-perfect interfaces",
-    //     "Integrated RESTful APIs and implemented state management solutions"
-    //   ],
-    //   projects: [
-    //     "E-commerce Platform",
-    //     "Content Management System",
-    //     "Customer Portal"
-    //   ],
-    //   technologies: ["JavaScript", "React", "Redux", "SASS", "REST APIs"],
-    //   logo: "/logos/digital-solutions.svg"
-    // },
-    // {
-    //   id: 3,
-    //   company: "WebCraft Studios",
-    //   role: "Junior Web Developer",
-    //   duration: "Jun 2019 - Feb 2021",
-    //   description: [
-    //     "Built and maintained client websites using HTML, CSS, and JavaScript",
-    //     "Implemented responsive designs and ensured cross-browser compatibility",
-    //     "Worked with WordPress and custom PHP solutions"
-    //   ],
-    //   projects: [
-    //     "Corporate Website Redesigns",
-    //     "Portfolio Sites",
-    //     "Landing Pages"
-    //   ],
-    //   technologies: ["HTML", "CSS", "JavaScript", "WordPress", "PHP"],
-    //   logo: "/logos/webcraft.svg"
-    // }
+    }
   ];
 
   const [expandedId, setExpandedId] = useState<number | null>(experiences.length > 1 ? null : 1);
@@ -166,21 +198,49 @@ const Experience = () => {
                 className="overflow-hidden"
               >
                 <div className="pt-4 border-t border-white/10 mt-4">
-                  <h5 className="text-white font-medium mb-2">Responsibilities:</h5>
-                  <ul className="list-disc list-inside text-white/80 space-y-1 mb-4">
-                    {exp.description.map((item, i) => (
-                      <li key={i}>{item}</li>
-                    ))}
-                  </ul>
 
-                  <h5 className="text-white font-medium mb-2">Projects:</h5>
-                  <ul className="list-disc list-inside text-white/80 space-y-1 mb-4">
-                    {exp.projects.map((project, i) => (
+                {exp.seniorRole && (
+                  <>
+                    <h3 className="mb-2"><span className="text-white font-semibold">{exp.seniorRole.title}</span> | {exp.seniorRole.period}</h3>
+                    
+                    {exp.seniorRole.sections.map((section, sectionIndex) => (
+                      <div key={sectionIndex} className="mb-8">
+                        <h6 className="text-white font-medium my-2 ml-2">{section.title}:</h6>
+                        <ul className="list-disc list-outside text-white/80 space-y-2  ml-6">
+                          {section.items.map((item, itemIndex) => (
+                            <li key={itemIndex} dangerouslySetInnerHTML={{ __html: item }} />
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </>
+                )}
+
+                  {exp.juniorRole && (
+                  <>
+                    <h3 className="mb-2"><span className="text-white font-semibold">{exp.juniorRole.title}</span> | {exp.juniorRole.period}</h3>
+                    
+                    {exp.juniorRole.sections.map((section, sectionIndex) => (
+                      <div key={sectionIndex} className="mb-8">
+                        <h6 className="text-white font-medium my-2 ml-2">{section.title}:</h6>
+                        <ul className="list-disc list-outside text-white/80 space-y-2 ml-6">
+                          {section.items.map((item, itemIndex) => (
+                            <li key={itemIndex} dangerouslySetInnerHTML={{ __html: item }} />
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </>
+                )}
+
+                  <h6 className={`text-white font-medium mb-2 ml-2 ${exp.projects && exp.projects.length > 0 ? "" : "hidden"}`}>Projects:</h6>
+                  <ul className={`list-disc list-outside text-white/80 space-y-2 mb-6 ml-6 ${exp.projects && exp.projects.length > 0 ? "" : "hidden"}`}>
+                    {exp.projects?.map((project, i) => (
                       <li key={i}>{project}</li>
                     ))}
                   </ul>
 
-                  <h5 className="text-white font-medium mb-2">Technologies:</h5>
+                  <h6 className="text-white font-medium mb-2">Technologies:</h6>
                   <div className="flex flex-wrap gap-2">
                     {exp.technologies.map((tech, i) => (
                       <span

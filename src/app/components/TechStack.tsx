@@ -58,7 +58,7 @@ export default function TechStack() {
   return (
     <div className={`w-full overflow-hidden py-10 ${performanceMode === 'full' ? 'backdrop-blur-sm bg-white/5' : 'bg-slate-800/90'} rounded-2xl shadow-xl border border-white/10`}>
       <motion.h2 
-        className="text-3xl font-bold text-white text-center mb-8 drop-shadow-md"
+        className="text-2xl sm:text-3xl font-bold text-white text-center mb-8 drop-shadow-md"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: performanceMode === 'full' ? 0.5 : 0.2, delay: performanceMode === 'full' ? 0.3 : 0.1 }}
