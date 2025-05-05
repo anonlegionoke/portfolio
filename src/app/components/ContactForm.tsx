@@ -131,7 +131,7 @@ export default function ContactForm() {
             animate={{ opacity: 1, y: 0 }}
             className="text-green-400 text-sm mt-2 text-center"
           >
-            Thank you for your message! I'll get back to you soon.
+            Thank you for your message! I&apos;ll get back to you soon.
           </motion.div>
         )}
         

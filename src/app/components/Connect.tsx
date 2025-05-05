@@ -93,7 +93,7 @@ const Connect = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: performanceMode === 'full' ? 0.5 : 0.2, delay: performanceMode === 'full' ? 0.3 : 0.1 }}
       >
-        Let's Connect
+        Let&apos;s Connect
       </motion.h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10">

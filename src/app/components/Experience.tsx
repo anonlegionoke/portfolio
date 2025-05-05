@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Circle, Tally1 } from "lucide-react";
+import { Circle } from "lucide-react";
 import { usePerformance } from "../context/PerformanceContext";
 
 interface ExperienceItem {

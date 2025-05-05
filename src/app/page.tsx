@@ -1,10 +1,8 @@
 "use client";
 
-import { House, PanelsTopLeft, ChartNoAxesGantt, Handshake, Tally1, Sun, Moon, ArrowUp } from 'lucide-react';
+import { House, PanelsTopLeft, ChartNoAxesGantt, Handshake, Tally1, ArrowUp } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import ImageCarousel from './components/ImageCarousel';
-import AnimatedIconsFlow from './components/AnimatedIconsFlow';
 import Project from './components/Project';
 import Connect from './components/Connect';
 import Experience from './components/Experience';
@@ -156,14 +154,14 @@ export default function Home() {
           transition={{ duration: performanceMode === 'full' ? 0.8 : 0.3 }}
         >
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white drop-shadow-md">
-            Hi, I'm <TypewriterEffect 
+            Hi, I&apos;m <TypewriterEffect 
               text="Sabir" 
               typingSpeed={150} 
               startDelay={800}
             />
           </h1>
           <h4 className="text-xl font-bold mt-6 md:mt-8 text-white/90 drop-shadow-sm">About Me</h4>
-          <p className="text-md text-white/80 leading-relaxed">I'm a software developer with a strong passion for building efficient, scalable, and user-friendly applications. With experience across both frontend and backend technologies, I enjoy crafting clean code and solving complex problems. My work spans from developing dynamic web interfaces to designing robust APIs and integrating third-party services. I'm always eager to learn new tools and frameworks, and I thrive in collaborative and fast-paced environments.  
+          <p className="text-md text-white/80 leading-relaxed">I&apos;m a software developer with a strong passion for building efficient, scalable, and user-friendly applications. With experience across both frontend and backend technologies, I enjoy crafting clean code and solving complex problems. My work spans from developing dynamic web interfaces to designing robust APIs and integrating third-party services. I&apos;m always eager to learn new tools and frameworks, and I thrive in collaborative and fast-paced environments.  
           </p>
           <div className="flex gap-4 mt-6 md:mt-8">
             <motion.button 

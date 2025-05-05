@@ -1,6 +1,6 @@
 import { motion, AnimatePresence, PanInfo } from "framer-motion"
 import { useState, useEffect, useRef } from "react"
-import { ArrowLeft, ArrowRight, ExternalLink, Github, SquareArrowOutUpRight } from "lucide-react"
+import { ArrowLeft, ArrowRight, Github, SquareArrowOutUpRight } from "lucide-react"
 import { usePerformance } from "../context/PerformanceContext"
 
 interface ProjectData {
