@@ -54,7 +54,7 @@ const Project = () => {
     {
       id: 5,
       name: "Todo Lister",
-      description: "Console Todo App in C++ that generates a random ID for each task, allowing users to add and mark tasks as completed using their unique IDs.",
+      description: "Console Todo App in C++ that generates a random ID for each task, allowing users to add and mark tasks as completed.",
       screenshot: "/screenshots/todo-lister.png",
       liveLink: undefined,
       githubLink: "https://github.com/anonlegionoke/Console-Todo",
