@@ -41,22 +41,20 @@ const Experience = () => {
         period: "Jan 2024 - Jun 2024",
         sections: [
           {
-            title: "UI Development",
+            title: "Feature Implementation",
             items: [
-              "Revamped Login and App UI for improved user experience and design consistency.",
               "Developed interactive Dashboard using <strong>Recharts</strong> with dynamic data based on user's local timezone.",
               "Built Timeline UI with supporting backend: database schema, REST APIs, and service logic.",
-              "Modernized legacy UI components including Call Logs, Contacts, and Call Flow."
+              "Implemented Campaigns Management UI for creation, tracking, and analysis.",
+              "Developed Advanced Search UI for Contacts with robust filtering capabilities.",
             ]
           },
           {
-            title: "Feature Implementation",
+            title: "UI Development",
             items: [
-              "Resolved call flow issues and improved performance using <strong>React Flow</strong>.",
-              "Implemented Campaigns Management UI for creation, tracking, and analysis.",
+              "Revamped Login and App UI for improved user experience and design consistency.",
+              "Modernized legacy UI components including Call Logs, Contacts, and Call Flow.",
               "Created reusable custom UI components: Country/State dropdowns and international phone input fields.",
-              "Developed Advanced Search UI for Contacts with robust filtering capabilities.",
-              "Managed component state using <strong>Redux</strong> for scalable state architecture."
             ]
           }
         ]
@@ -66,25 +64,29 @@ const Experience = () => {
         period: "Jun 2024 - Present",
         sections: [
           {
-            title: "Frontend Development",
+            title: "Call Management System",
             items: [
-              "Built fully functional Click-to-Call UI and browser-based softphone interface for both outgoing and incoming calls.",
+              "Built interactive softphone interface for both incoming and outgoing calls with advanced real-time state management using <strong>Redux</strong>.",
               "Improved Call Flow performance by over <strong>60%</strong> and optimized rendering using <strong>React Flow</strong>.",
-              "Integrated <strong>AWS Media Services</strong> for audio processing and waveform visualizations.",
-              "Collaborated with UI/UX designers on design iterations and feedback using <strong>Figma</strong>.",
-              "Enhanced Customer Onboarding UI to improve usability and engagement metrics.",
-              "Managed advanced call state transitions using <strong>Redux</strong> for real-time call interaction handling."
+              "Integrated <strong>AWS Media Services</strong> for audio processing and developed UI with waveform visualizations.",
+              "Implemented Sticky Agent feature to optimize agent assignment and improve routing persistence.",
+              "Achieved <strong>100%</strong> accuracy and consistency in call logging across normalized <strong>Cassandra</strong> tables, handling over <strong>100,000</strong> entries daily.",
+              // "Enhanced Customer Onboarding UI to improve usability and engagement metrics.",
             ]
           },
           {
-            title: "Backend Development",
+            title: "Analytics Dashboard",
             items: [
-              "Fixed critical bugs and rewrote logging logic for enhanced reliability and traceability.",
-              "Implemented Sticky Agent feature to optimize agent assignment and improve routing persistence.",
+              "Developed efficient, scalable filtering and data consistency strategies on <strong>Cassandra</strong> across microservices.",
+              "Collaborated with UI/UX designers on design iterations and feedback using <strong>Figma</strong>.",
+              "Secured API routes and produced comprehensive API documentation for team and client usage.",
+            ]
+          },
+          {
+            title: "Campaigns Management System",
+            items: [
               "Rewrote Campaigns backend logic to significantly improve scalability and response times.",
               "Designed and implemented a Job Scheduler for campaign and task services with jobs running at various intervals or on customer interaction.",
-              "Achieved <strong>100%</strong> accuracy and consistency in call logging across normalized <strong>Cassandra</strong> tables, handling over <strong>100,000</strong> entries daily.",
-              "Developed efficient, scalable filtering and data consistency strategies on <strong>Cassandra</strong> across microservices.",
               "Secured API routes and produced comprehensive API documentation for team and client usage.",
             ]
           },
@@ -93,6 +95,7 @@ const Experience = () => {
             items: [
               "Mentored junior developers and contributed to sprint planning and project management.",
               "Maintained and optimized CI/CD pipelines for reliable deployment of core services.",
+              "Led cross-functional meetings with customer support to develop the Sticky Agent feature based on user feedback",
               "Managed Microservices deployments using <strong>Docker</strong> and <strong>Nginx</strong> with a focus on stability and scalability."
             ]
           }
@@ -104,7 +107,7 @@ const Experience = () => {
     }
   ];
 
-  const [expandedId, setExpandedId] = useState<number | null>(experiences.length > 1 ? null : 1);
+  const [expandedId, setExpandedId] = useState<number | null>(null);
   const { performanceMode } = usePerformance();
 
   const toggleExpand = (id: number) => {
@@ -191,8 +194,8 @@ const Experience = () => {
               <motion.div
                 initial={{ height: 0, opacity: 0 }}
                 animate={{
-                  height: expandedId === exp.id ? "auto" : 0,
-                  opacity: expandedId === exp.id ? 1 : 0
+                  height: expandedId === exp.id ? "auto" : '250px',
+                  opacity: expandedId === exp.id ? 1 : 0.65
                 }}
                 transition={{ duration: performanceMode === 'full' ? 0.3 : 0.2 }}
                 className="overflow-hidden"
@@ -201,12 +204,12 @@ const Experience = () => {
 
                 {exp.seniorRole && (
                   <>
-                    <h3 className="mb-2"><span className="text-white font-semibold">{exp.seniorRole.title}</span> | {exp.seniorRole.period}</h3>
+                    <h3 className="mb-2"><span className="text-white text-lg font-semibold">{exp.seniorRole.title}</span> | {exp.seniorRole.period}</h3>
                     
                     {exp.seniorRole.sections.map((section, sectionIndex) => (
                       <div key={sectionIndex} className="mb-8">
-                        <h6 className="text-white font-medium my-2 ml-2">{section.title}:</h6>
-                        <ul className="list-disc list-outside text-white/80 space-y-2  ml-6">
+                        <h6 className="text-white font-semibold my-2 ml-2 ">{section.title}:</h6>
+                        <ul className="list-disc list-outside text-white/80 text-sm md:text-base space-y-2  ml-6">
                           {section.items.map((item, itemIndex) => (
                             <li key={itemIndex} dangerouslySetInnerHTML={{ __html: item }} />
                           ))}
@@ -218,12 +221,12 @@ const Experience = () => {
 
                   {exp.juniorRole && (
                   <>
-                    <h3 className="mb-2"><span className="text-white font-semibold">{exp.juniorRole.title}</span> | {exp.juniorRole.period}</h3>
+                    <h3 className="mb-2"><span className="text-white text-lg font-semibold">{exp.juniorRole.title}</span> | {exp.juniorRole.period}</h3>
                     
                     {exp.juniorRole.sections.map((section, sectionIndex) => (
                       <div key={sectionIndex} className="mb-8">
-                        <h6 className="text-white font-medium my-2 ml-2">{section.title}:</h6>
-                        <ul className="list-disc list-outside text-white/80 space-y-2 ml-6">
+                        <h6 className="text-white my-2 ml-2 font-semibold">{section.title}:</h6>
+                        <ul className="list-disc list-outside text-white/80 text-sm md:text-base space-y-2 ml-6">
                           {section.items.map((item, itemIndex) => (
                             <li key={itemIndex} dangerouslySetInnerHTML={{ __html: item }} />
                           ))}
@@ -245,7 +248,7 @@ const Experience = () => {
                     {exp.technologies.map((tech, i) => (
                       <span
                         key={i}
-                        className="px-3 py-1 bg-white/10 rounded-full text-sm text-white/90"
+                        className="px-3 py-1 bg-white/10 rounded-full text-xs text-white/90"
                       >
                         {tech}
                       </span>

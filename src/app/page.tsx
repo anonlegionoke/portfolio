@@ -228,6 +228,18 @@ export default function Home() {
           </motion.button>
         )}
       </AnimatePresence>
+
+      {/* footer */}
+      <motion.div 
+        className="w-full pb-3 text-center text-white/70"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5, duration: performanceMode === 'full' ? 0.8 : 0.3 }}
+      >
+        <p className="text-sm">
+          <span className="mr-1">{"\u00A9"}</span>{new Date().getFullYear()} • Thank you for visiting ❤️
+        </p>
+      </motion.div>
     </main>
   );
 }
