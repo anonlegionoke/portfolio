@@ -36,7 +36,7 @@ const Connect = () => {
     {
       name: "Twitter/X",
       icon: <Twitter size={22} />,
-      url: "https://x.com/Sabir876330",
+      url: "https://x.com/sabirpm_",
       color: "#1DA1F2"
     },
     {

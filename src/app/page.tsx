@@ -14,6 +14,28 @@ import TypewriterEffect from './components/TypewriterEffect';
 export default function Home() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const { performanceMode } = usePerformance();
+  const [loading, setLoading] = useState(true);
+  const [loadingText, setLoadingText] = useState("Just a sec...");
+  
+  useEffect(() => {
+    const textInterval = setInterval(() => {
+      setLoadingText(prev => {
+        if (prev.endsWith("...")) return "Just a sec";
+        if (prev.endsWith("..")) return "Just a sec...";
+        if (prev.endsWith(".")) return "Just a sec..";
+        return "Just a sec.";
+      });
+    }, 300);
+    
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+    
+    return () => {
+      clearTimeout(timer);
+      clearInterval(textInterval);
+    };
+  }, []);
   
   const scrollToSection = (elementId: string) => {
     const element = document.getElementById(elementId);
@@ -51,6 +73,23 @@ export default function Home() {
   
   return (
     <main className="relative min-h-screen overflow-hidden">
+      {/* Loading Overlay */}
+      {loading && (
+        <div className="fixed inset-0 bg-slate-900 flex flex-col items-center justify-center z-50">
+          <div className="relative w-24 h-24 mb-8">
+            <div className="w-24 h-24 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
+            <div className="w-24 h-24 border-r-4 border-purple-500 border-solid rounded-full animate-spin absolute top-0 left-0" style={{ animationDuration: '1.5s' }}></div>
+            <div className="w-24 h-24 border-b-4 border-pink-500 border-solid rounded-full animate-spin absolute top-0 left-0" style={{ animationDuration: '2s' }}></div>
+          </div>
+          <h2 className="text-2xl font-bold text-white">{loadingText}</h2>
+          <div className="flex space-x-2 mt-4">
+            <div className="w-3 h-3 rounded-full bg-blue-500 animate-pulse"></div>
+            <div className="w-3 h-3 rounded-full bg-purple-500 animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+            <div className="w-3 h-3 rounded-full bg-pink-500 animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+          </div>
+        </div>
+      )}
+      
       <div 
         className={`fixed inset-0 -z-10 bg-gradient-to-br from-blue-500/30 via-purple-500/20 to-pink-500/30`} 
         style={{ 

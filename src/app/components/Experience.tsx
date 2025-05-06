@@ -75,18 +75,18 @@ const Experience = () => {
             ]
           },
           {
-            title: "Analytics Dashboard",
-            items: [
-              "Developed efficient, scalable filtering and data consistency strategies on <strong>Cassandra</strong> across microservices.",
-              "Collaborated with UI/UX designers on design iterations and feedback using <strong>Figma</strong>.",
-              "Secured API routes and produced comprehensive API documentation for team and client usage.",
-            ]
-          },
-          {
             title: "Campaigns Management System",
             items: [
               "Rewrote Campaigns backend logic to significantly improve scalability and response times.",
               "Designed and implemented a Job Scheduler for campaign and task services with jobs running at various intervals or on customer interaction.",
+              "Secured API routes and produced comprehensive API documentation for team and client usage.",
+            ]
+          },
+          {
+            title: "Analytics Dashboard",
+            items: [
+              "Developed efficient, scalable filtering and data consistency strategies on <strong>Cassandra</strong> across microservices.",
+              "Collaborated with UI/UX designers on design iterations and feedback using <strong>Figma</strong>.",
               "Secured API routes and produced comprehensive API documentation for team and client usage.",
             ]
           },
