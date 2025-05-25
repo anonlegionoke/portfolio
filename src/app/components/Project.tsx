@@ -17,15 +17,24 @@ const Project = () => {
   const projects: ProjectData[] = [
     {
       id: 1,
+      name: "Angle",
+      description: "Angle is an AI-powered animation studio that turns your descriptions into beautiful, professional animations. ",
+      screenshot: "/screenshots/angle-video-maker3.png",
+      liveLink: "https://angle-alpha.vercel.app/",
+      githubLink: "https://github.com/anonlegionoke/angle",
+      techStack: ["Next.js", "React", "TypeScript", "Python", "Tailwind CSS", "Framer", "FFmpeg", "Manim", "Gemini"]
+    },
+    {
+      id: 2,
       name: "Chat with AI-RAG",
       description: "A modern, interactive chat application built with Next.js that demonstrates various AI conversation modes including Retrieval-Augmented Generation (RAG) capabilities.",
       screenshot: "/screenshots/ai-rag-chat-1.png",
-      liveLink: undefined,
+      liveLink: "https://chat-with-ai-rag.vercel.app/",
       githubLink: "https://github.com/anonlegionoke/Chat-with-AI-RAG",
       techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "LangChain", "Gemini"]
     },
     {
-      id: 2,
+      id: 3,
       name: "Crypto Gate",
       description: "A secure Solana-based crypto payment gateway where merchants can accept any token and settle in USDC via Jupiter swap integration.",
       screenshot: "/screenshots/crypto-gate.png",
@@ -34,7 +43,7 @@ const Project = () => {
       techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Jupiter", "Solana", "PostgreSQL", "Prisma", "JWT"]
     },
     {
-      id: 3,
+      id: 4,
       name: "Blog App",
       description: "A React-based blog app powered by Appwrite, featuring rich text editing, image uploads, post management, and user authentication with synced access across devices.",
       screenshot: "/screenshots/blog-app.png",
@@ -43,7 +52,7 @@ const Project = () => {
       techStack: ["React", "TypeScript", "Tailwind CSS", "Appwrite", "TinyMCE", ]
     },
     {
-      id: 4,
+      id: 5,
       name: "Movie Review App",
       description: "A movie review app using the TMDb API, allowing users to browse movies, search titles, read and contribute reviews with full create, update, and delete support.",
       screenshot: "/screenshots/movie-review-app.png",
@@ -52,7 +61,7 @@ const Project = () => {
       techStack: ["JavaScript", "HTML", "CSS", "Node.js", "Express", "MongoDB"] 
     },
     {
-      id: 5,
+      id: 6,
       name: "Todo Lister",
       description: "Console Todo App in C++ that generates a random ID for each task, allowing users to add and mark tasks as completed.",
       screenshot: "/screenshots/todo-lister.png",
@@ -61,7 +70,7 @@ const Project = () => {
       techStack: ["C++"]
     },
     {
-      id: 6,
+      id: 7,
       name: "Blockbuster | The Movie Store",
       description: "Landing page for the Blockbuster Movie Store website if they were still around today.",
       screenshot: "/screenshots/blockbuster.png",
@@ -70,7 +79,7 @@ const Project = () => {
       techStack: ["HTML", "CSS", "JavaScript"] 
     },
     {
-      id: 7,
+      id: 8,
       name: "Greeting on Panel",
       description: "A simple and efficient extension to display greetings based on time of the day on the GNOME desktop environment top panel.",
       screenshot: "/screenshots/gnome-extension.png",
@@ -79,7 +88,7 @@ const Project = () => {
       techStack: ["JavaScript", "Gnome-Shell"]
     },
     {
-      id: 8,
+      id: 9,
       name: "Loop Texts on Panel",
       description: "A customizable GNOME extension that displays any text—such as reminders or quick notes—on the top panel, with support for looping messages for continuous visibility.",
       screenshot: "/screenshots/gnome-extension.png",
