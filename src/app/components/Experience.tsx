@@ -8,7 +8,7 @@ interface ExperienceItem {
   company: string;
   role: string;
   duration: string;
-  juniorRole?: {
+  role1?: {
     title: string;
     period: string;
     sections: {
@@ -16,7 +16,7 @@ interface ExperienceItem {
       items: string[];
     }[];
   };
-  seniorRole?: {
+  role2?: {
     title: string;
     period: string;
     sections: {
@@ -34,9 +34,9 @@ const Experience = () => {
     {
       id: 1,
       company: "Bistux Solutions Pvt. Ltd.",
-      role: "Full Stack Developer",
+      role: "Software Developer",
       duration: "Jan 2024 - Present",
-      juniorRole: {
+      role1: {
         title: "Junior Software Developer",
         period: "Jan 2024 - Jun 2024",
         sections: [
@@ -59,7 +59,7 @@ const Experience = () => {
           }
         ]
       },
-      seniorRole: {
+      role2: {
         title: "Full Stack Developer",
         period: "Jun 2024 - Present",
         sections: [
@@ -77,7 +77,7 @@ const Experience = () => {
           {
             title: "Campaigns Management System",
             items: [
-              "Rewrote Campaigns backend logic to significantly improve scalability and response times.",
+              "Rewritten Campaigns backend logic to significantly improve scalability and response times.",
               "Designed and implemented a <strong>Job Scheduler</strong> for campaign and task services with jobs running at various intervals or on customer interaction.",
               "Secured API routes and produced comprehensive API documentation for team and client usage.",
             ]
@@ -200,42 +200,67 @@ const Experience = () => {
                 transition={{ duration: performanceMode === 'full' ? 0.3 : 0.2 }}
                 className="overflow-hidden"
               >
-                <div className="pt-4 border-t border-white/10 mt-4">
-
-                {exp.seniorRole && (
-                  <>
-                    <h3 className="mb-2"><span className="text-white text-lg font-semibold">{exp.seniorRole.title}</span> | {exp.seniorRole.period}</h3>
-                    
-                    {exp.seniorRole.sections.map((section, sectionIndex) => (
-                      <div key={sectionIndex} className="mb-8">
-                        <h6 className="text-white font-semibold my-2 ml-2 ">{section.title}:</h6>
-                        <ul className="list-disc list-outside text-white/80 text-sm md:text-base space-y-2  ml-6">
-                          {section.items.map((item, itemIndex) => (
-                            <li key={itemIndex} dangerouslySetInnerHTML={{ __html: item }} />
+              <div className="pt-8 border-t border-white/10 m-5">
+                <ol className="relative border-s border-gray-200 dark:border-gray-700">    
+                  {exp.role2 && (
+                    <li className="mb-10 ms-6">            
+                      <span className="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900 mt-1">
+                        <svg className="w-2.5 h-2.5 text-blue-800 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                        </svg>
+                      </span>
+                      <div className="ml-1">
+                        <h3 className="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
+                          {exp.role2.title}
+                        </h3>
+                        <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+                          {exp.role2.period}
+                        </time>
+                        <div className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                          {exp.role2.sections.map((section, sectionIndex) => (
+                            <div key={sectionIndex} className="mb-8">
+                              <h6 className="text-white font-semibold my-2 ml-2">{section.title}:</h6>
+                              <ul className="list-disc list-outside text-white/80 text-sm md:text-base space-y-2 ml-6">
+                                {section.items.map((item, itemIndex) => (
+                                  <li key={itemIndex} dangerouslySetInnerHTML={{ __html: item }} />
+                                ))}
+                              </ul>
+                            </div>
                           ))}
-                        </ul>
+                        </div>
                       </div>
-                    ))}
-                  </>
-                )}
-
-                  {exp.juniorRole && (
-                  <>
-                    <h3 className="mb-2"><span className="text-white text-lg font-semibold">{exp.juniorRole.title}</span> | {exp.juniorRole.period}</h3>
-                    
-                    {exp.juniorRole.sections.map((section, sectionIndex) => (
-                      <div key={sectionIndex} className="mb-8">
-                        <h6 className="text-white my-2 ml-2 font-semibold">{section.title}:</h6>
-                        <ul className="list-disc list-outside text-white/80 text-sm md:text-base space-y-2 ml-6">
-                          {section.items.map((item, itemIndex) => (
-                            <li key={itemIndex} dangerouslySetInnerHTML={{ __html: item }} />
+                    </li>
+                  )}
+                  {exp.role1 && (
+                    <li className="mb-10 ms-6">            
+                      <span className="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900 mt-1">
+                        <svg className="w-2.5 h-2.5 text-blue-800 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                        </svg>
+                      </span>
+                      <div className="ml-1">
+                        <h3 className="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
+                          {exp.role1.title}
+                        </h3>
+                        <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+                          {exp.role1.period}
+                        </time>
+                        <div className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                          {exp.role1.sections.map((section, sectionIndex) => (
+                            <div key={sectionIndex} className="mb-8">
+                              <h6 className="text-white font-semibold my-2 ml-2">{section.title}:</h6>
+                              <ul className="list-disc list-outside text-white/80 text-sm md:text-base space-y-2 ml-6">
+                                {section.items.map((item, itemIndex) => (
+                                  <li key={itemIndex} dangerouslySetInnerHTML={{ __html: item }} />
+                                ))}
+                              </ul>
+                            </div>
                           ))}
-                        </ul>
+                        </div>
                       </div>
-                    ))}
-                  </>
-                )}
-
+                    </li>
+                  )}
+                </ol>
                   <h6 className={`text-white font-medium mb-2 ml-2 ${exp.projects && exp.projects.length > 0 ? "" : "hidden"}`}>Projects:</h6>
                   <ul className={`list-disc list-outside text-white/80 space-y-2 mb-6 ml-6 ${exp.projects && exp.projects.length > 0 ? "" : "hidden"}`}>
                     {exp.projects?.map((project, i) => (
