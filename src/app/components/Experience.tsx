@@ -78,7 +78,7 @@ const Experience = () => {
             title: "Campaigns Management System",
             items: [
               "Rewrote Campaigns backend logic to significantly improve scalability and response times.",
-              "Designed and implemented a Job Scheduler for campaign and task services with jobs running at various intervals or on customer interaction.",
+              "Designed and implemented a <strong>Job Scheduler</strong> for campaign and task services with jobs running at various intervals or on customer interaction.",
               "Secured API routes and produced comprehensive API documentation for team and client usage.",
             ]
           },
