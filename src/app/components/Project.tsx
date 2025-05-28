@@ -1,7 +1,8 @@
 import { motion, AnimatePresence, PanInfo } from "framer-motion"
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useCallback, useMemo } from "react"
 import { ArrowLeft, ArrowRight, Github, SquareArrowOutUpRight } from "lucide-react"
 import { usePerformance } from "../context/PerformanceContext"
+import Image from "next/image"
 
 interface ProjectData {
   id: number
@@ -100,11 +101,13 @@ const Project = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [direction, setDirection] = useState(0); // -1 for left, 1 for right
+  const [direction, setDirection] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const { performanceMode } = usePerformance();
 
-  const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+  const currentProject = useMemo(() => projects[currentIndex], [currentIndex]);
+
+  const handleDragEnd = useCallback((event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     if (Math.abs(info.offset.x) > 10) {
       if (info.offset.x > 0) {
         goToPrevious();
@@ -112,42 +115,27 @@ const Project = () => {
         goToNext();
       }
     }
-  };
+  }, []);
 
-  const goToPrevious = () => {
+  const goToPrevious = useCallback(() => {
     setDirection(-1);
     setCurrentIndex((prevIndex) => 
       prevIndex === 0 ? projects.length - 1 : prevIndex - 1
     );
     setIsPaused(true);
-    setTimeout(() => setIsPaused(false), 10000); // Resume after 10 seconds
-  };
+    setTimeout(() => setIsPaused(false), 10000);
+  }, [projects.length]);
 
-  const goToNext = () => {
+  const goToNext = useCallback(() => {
     setDirection(1);
     setCurrentIndex((prevIndex) => 
       prevIndex === projects.length - 1 ? 0 : prevIndex + 1
     );
     setIsPaused(true);
-    setTimeout(() => setIsPaused(false), 10000); // Resume after 10 seconds
-  };
+    setTimeout(() => setIsPaused(false), 10000);
+  }, [projects.length]);
 
-  useEffect(() => {
-    if (isPaused || performanceMode === 'light') return;
-    
-    const interval = setInterval(() => {
-      setDirection(1);
-      setCurrentIndex((prevIndex) => 
-        prevIndex === projects.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 8000);
-    
-    return () => clearInterval(interval);
-  }, [currentIndex, isPaused, projects.length, performanceMode]);
-
-  const currentProject = projects[currentIndex];
-
-  const slideVariants = {
+  const slideVariants = useMemo(() => ({
     enter: (direction: number) => ({
       x: direction > 0 ? '100%' : '-100%',
       opacity: 0
@@ -162,7 +150,20 @@ const Project = () => {
       opacity: 0,
       zIndex: 0
     })
-  };
+  }), []);
+
+  useEffect(() => {
+    if (isPaused || performanceMode === 'light') return;
+    
+    const interval = setInterval(() => {
+      setDirection(1);
+      setCurrentIndex((prevIndex) => 
+        prevIndex === projects.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 8000);
+    
+    return () => clearInterval(interval);
+  }, [isPaused, performanceMode, projects.length]);
 
   return (
     <motion.div 
@@ -228,10 +229,13 @@ const Project = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
                 <div className="w-full h-[200px] md:h-[300px] lg:h-[300px] bg-gray-800 flex items-center justify-center">
                   {currentProject.screenshot ? (
-                    <img 
+                    <Image 
                       src={currentProject.screenshot} 
                       alt={`${currentProject.name} screenshot`} 
-                      className="w-full h-full object-contain md:object-cover lg:object-cover"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-contain md:object-cover lg:object-cover"
+                      priority={currentIndex === 0}
                     />
                   ) : (
                     <div className="text-white/50">Screenshot</div>

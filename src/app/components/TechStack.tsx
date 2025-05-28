@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { usePerformance } from '../context/PerformanceContext';
+import Image from 'next/image';
 
 interface TechIcon {
   name: string;
@@ -96,10 +97,13 @@ export default function TechStack() {
                   transition: 'box-shadow 0.3s ease'
                 }}
               >
-                <img 
+                <Image 
                   src={tech.icon} 
                   alt={tech.name} 
-                  className="w-10 h-10 object-contain" 
+                  width={40}
+                  height={40}
+                  className="object-contain" 
+                  priority={index < 6}
                 />
               </div>
               <span className="text-xs text-white/70">{tech.name}</span>
@@ -136,10 +140,13 @@ export default function TechStack() {
                   transition: 'box-shadow 0.3s ease'
                 }}
               >
-                <img 
+                <Image 
                   src={tech.icon} 
                   alt={tech.name} 
-                  className="w-10 h-10 object-contain" 
+                  width={40}
+                  height={40}
+                  className="object-contain" 
+                  priority={index < 6}
                 />
               </div>
               <span className="text-xs text-white/70">{tech.name}</span>

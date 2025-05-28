@@ -4,11 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const placeholderImages = [
-  'https://static.vecteezy.com/system/resources/previews/000/259/360/non_2x/vector-minimal-beach-landscape.jpg',
-  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTciAYuz8mxO8V_0fH0iBl19S9e3rIMnvnucw&s',
-  'https://img.freepik.com/premium-photo/minimal-summer-beach-landscape-with-copy-space-blue-sky-background-illustration-graphic-design_176697-1398.jpg',
-  'https://i.redd.it/c6f8zkx8ef3b1.jpg',
-  'https://img.pikbest.com/background/20220119/summer-beach-blue-minimalist-poster-background_6232150.jpg!bw700',
+''
 ];
 
 export default function ImageCarousel() {

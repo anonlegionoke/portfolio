@@ -216,7 +216,7 @@ const Experience = () => {
                         <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
                           {exp.role2.period}
                         </time>
-                        <div className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                        <div className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400 mt-5">
                           {exp.role2.sections.map((section, sectionIndex) => (
                             <div key={sectionIndex} className="mb-8">
                               <h6 className="text-white font-semibold my-2 ml-2">{section.title}:</h6>
@@ -245,7 +245,7 @@ const Experience = () => {
                         <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
                           {exp.role1.period}
                         </time>
-                        <div className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                        <div className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400 mt-5">
                           {exp.role1.sections.map((section, sectionIndex) => (
                             <div key={sectionIndex} className="mb-8">
                               <h6 className="text-white font-semibold my-2 ml-2">{section.title}:</h6>
