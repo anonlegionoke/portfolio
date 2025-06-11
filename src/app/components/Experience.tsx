@@ -201,22 +201,22 @@ const Experience = () => {
                 className="overflow-hidden"
               >
               <div className="pt-8 border-t border-white/10 m-5">
-                <ol className="relative border-s border-gray-200 dark:border-gray-700">    
+                <ol className="relative border-s border-gray-700">    
                   {exp.role2 && (
                     <li className="mb-10 ms-6">            
-                      <span className="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900 mt-1">
-                        <svg className="w-2.5 h-2.5 text-blue-800 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                      <span className="absolute flex items-center justify-center w-6 h-6  rounded-full -start-3 ring-8  ring-gray-900 bg-blue-900 mt-1">
+                        <svg className="w-2.5 h-2.5 text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                           <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                         </svg>
                       </span>
                       <div className="ml-1">
-                        <h3 className="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
+                        <h3 className="flex items-center mb-1 text-lg font-semibold text-white">
                           {exp.role2.title}
                         </h3>
-                        <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+                        <time className="block mb-2 text-sm font-normal leading-none text-gray-400">
                           {exp.role2.period}
                         </time>
-                        <div className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400 mt-5">
+                        <div className="mb-4 text-base font-normal text-gray-500 mt-5">
                           {exp.role2.sections.map((section, sectionIndex) => (
                             <div key={sectionIndex} className="mb-8">
                               <h6 className="text-white font-semibold my-2 ml-2">{section.title}:</h6>
@@ -233,19 +233,19 @@ const Experience = () => {
                   )}
                   {exp.role1 && (
                     <li className="mb-10 ms-6">            
-                      <span className="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900 mt-1">
-                        <svg className="w-2.5 h-2.5 text-blue-800 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                      <span className="absolute flex items-center justify-center w-6 h-6 rounded-full -start-3 ring-8 ring-gray-900 bg-blue-900 mt-1">
+                        <svg className="w-2.5 h-2.5 text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                           <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                         </svg>
                       </span>
                       <div className="ml-1">
-                        <h3 className="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
+                        <h3 className="flex items-center mb-1 text-lg font-semibold text-white">
                           {exp.role1.title}
                         </h3>
-                        <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+                        <time className="block mb-2 text-sm font-normal leading-none text-gray-400">
                           {exp.role1.period}
                         </time>
-                        <div className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400 mt-5">
+                        <div className="mb-4 text-base font-normal text-gray-500 mt-5">
                           {exp.role1.sections.map((section, sectionIndex) => (
                             <div key={sectionIndex} className="mb-8">
                               <h6 className="text-white font-semibold my-2 ml-2">{section.title}:</h6>
