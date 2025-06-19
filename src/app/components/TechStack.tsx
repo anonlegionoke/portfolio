@@ -56,104 +56,159 @@ export default function TechStack() {
   const animationDuration = 15;
   const hoverEffects = performanceMode === 'full';
 
+  const animations = {
+    ...(hoverEffects && {
+      initial: { opacity: 0 },
+      animate: { opacity: 1 },
+      transition: { duration: 0.5, delay: 0.3 },
+      divAnimate1: { x: ["0%", "-50%"] },
+      divTransition1: { 
+        x: {
+          repeat: Infinity,
+          repeatType: "mirror",
+          duration: animationDuration,
+          ease: "linear"
+        }
+      },
+      divAnimate2: { x: ["-50%", "0%"] },
+      divTransition2: { 
+        x: {
+          repeat: Infinity,
+          repeatType: "mirror",
+          duration: animationDuration,
+          ease: "linear"
+        }
+      }
+    })
+  }
+
   return (
-    <div className={`w-full overflow-hidden py-10 ${performanceMode === 'full' ? 'backdrop-blur-sm bg-white/5' : 'bg-slate-800/90'} rounded-2xl shadow-xl border border-white/10`}>
+    <div className={`w-full overflow-hidden ${performanceMode === 'full' ? 'py-10' : 'pt-10'} ${performanceMode === 'full' ? 'backdrop-blur-sm bg-white/5' : 'bg-black/20'} rounded-2xl shadow-xl border border-white/10`}>
       <motion.h2 
         className="text-2xl sm:text-3xl font-bold text-white text-center mb-8 drop-shadow-md"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: performanceMode === 'full' ? 0.5 : 0.2, delay: performanceMode === 'full' ? 0.3 : 0.1 }}
+        initial={animations.initial}
+        animate={ animations.animate }
+        transition={ animations.transition }
       >
         Technologies I Work With
       </motion.h2>
       
-      <div className="relative">
-        {/* First row - moving right */}
-        <motion.div 
-          className="flex space-x-12 mb-8"
-          animate={{ x: performanceMode === 'light' ? ["0%", "-30%"] : ["0%", "-50%"] }}
-          transition={{ 
-            x: {
-              repeat: Infinity,
-              repeatType: "mirror",
-              duration: animationDuration,
-              ease: "linear"
-            }
-          }}
-        >
-          {duplicatedIcons.map((tech, index) => (
-            <motion.div 
-              key={`${tech.name}-${index}`}
-              className="flex flex-col items-center justify-center w-20"
-              whileHover={hoverEffects ? { y: -5, scale: 1.1 } : {}}
-              onHoverStart={() => hoverEffects && setHoveredIcon(tech.name + index)}
-              onHoverEnd={() => hoverEffects && setHoveredIcon(null)}
+      {hoverEffects ? (
+       <div className="relative">
+       {/* First row - moving right */}
+       <motion.div 
+         className="flex space-x-12 mb-8"
+         animate={animations.divAnimate1}
+         transition={animations.divTransition1}
+       >
+         {duplicatedIcons.map((tech, index) => (
+           <motion.div 
+             key={`${tech.name}-${index}`}
+             className="flex flex-col items-center justify-center w-20"
+             whileHover={hoverEffects ? { y: -5, scale: 1.1 } : {}}
+             onHoverStart={() => hoverEffects && setHoveredIcon(tech.name + index)}
+             onHoverEnd={() => hoverEffects && setHoveredIcon(null)}
+           >
+             <div 
+               className="w-16 h-16 flex items-center justify-center rounded-xl p-2 mb-2"
+               style={{ 
+                 backgroundColor: `${tech.color}20`,
+                 boxShadow: hoverEffects && hoveredIcon === tech.name + index ? `0 0 15px ${tech.color}80` : 'none',
+                 transition: 'box-shadow 0.3s ease'
+               }}
+             >
+               <Image 
+                 src={tech.icon} 
+                 alt={tech.name} 
+                 width={40}
+                 height={40}
+                 className="object-contain" 
+                 priority={index < 6}
+               />
+             </div>
+             <span className="text-xs text-white/70">{tech.name}</span>
+           </motion.div>
+         ))}
+       </motion.div>
+       
+       {/* Second row - moving left */}
+       <motion.div 
+         className="flex space-x-12"
+         animate={animations.divAnimate2}
+         transition={animations.divTransition2}
+       >
+         {duplicatedIcons.slice().reverse().map((tech, index) => (
+           <motion.div 
+             key={`reverse-${tech.name}-${index}`}
+             className="flex flex-col items-center justify-center w-20"
+             whileHover={hoverEffects ? { y: -5, scale: 1.1 } : {}}
+             onHoverStart={() => hoverEffects && setHoveredIcon(`reverse-${tech.name}-${index}`)}
+             onHoverEnd={() => hoverEffects && setHoveredIcon(null)}
+           >
+             <div 
+               className="w-16 h-16 flex items-center justify-center rounded-xl p-2 mb-2"
+               style={{ 
+                 backgroundColor: `${tech.color}20`,
+                 boxShadow: hoverEffects && hoveredIcon === `reverse-${tech.name}-${index}` ? `0 0 15px ${tech.color}80` : 'none',
+                 transition: 'box-shadow 0.3s ease'
+               }}
+             >
+               <Image 
+                 src={tech.icon} 
+                 alt={tech.name} 
+                 width={40}
+                 height={40}
+                 className="object-contain" 
+                 priority={index < 6}
+               />
+             </div>
+             <span className="text-xs text-white/70">{tech.name}</span>
+           </motion.div>
+         ))}
+       </motion.div>
+     </div>
+      ) : (
+          <div className="relative">
+            <div className="grid grid-cols-4 lg:grid-cols-12 gap-4 max-h-84 p-4 rounded-xl"
             >
-              <div 
-                className="w-16 h-16 flex items-center justify-center rounded-xl p-2 mb-2"
-                style={{ 
-                  backgroundColor: `${tech.color}20`,
-                  boxShadow: hoverEffects && hoveredIcon === tech.name + index ? `0 0 15px ${tech.color}80` : 'none',
-                  transition: 'box-shadow 0.3s ease'
-                }}
-              >
-                <Image 
-                  src={tech.icon} 
-                  alt={tech.name} 
-                  width={40}
-                  height={40}
-                  className="object-contain" 
-                  priority={index < 6}
-                />
-              </div>
-              <span className="text-xs text-white/70">{tech.name}</span>
-            </motion.div>
-          ))}
-        </motion.div>
-        
-        {/* Second row - moving left */}
-        <motion.div 
-          className="flex space-x-12"
-          animate={{ x: performanceMode === 'light' ? ["-30%", "0%"] : ["-50%", "0%"] }}
-          transition={{ 
-            x: {
-              repeat: Infinity,
-              repeatType: "mirror",
-              duration: animationDuration,
-              ease: "linear"
-            }
-          }}
-        >
-          {duplicatedIcons.slice().reverse().map((tech, index) => (
-            <motion.div 
-              key={`reverse-${tech.name}-${index}`}
-              className="flex flex-col items-center justify-center w-20"
-              whileHover={hoverEffects ? { y: -5, scale: 1.1 } : {}}
-              onHoverStart={() => hoverEffects && setHoveredIcon(`reverse-${tech.name}-${index}`)}
-              onHoverEnd={() => hoverEffects && setHoveredIcon(null)}
+              {techIcons.map((tech, index) => (
+                <div 
+                  key={`${tech.name}-${index}`}
+                  className="flex flex-col items-center justify-center"
+                >
+                  <div 
+                    className="w-12 h-12 flex items-center justify-center rounded-xl p-2 mb-2"
+                    style={{ backgroundColor: `${tech.color}20` }}
+                  >
+                    <Image 
+                      src={tech.icon} 
+                      alt={tech.name} 
+                      width={25}
+                      height={25}
+                      className="object-contain" 
+                      priority={index < 6}
+                    />
+                  </div>
+                  <span className="text-xs text-white/70">{tech.name}</span>
+                </div>
+              ))}
+            </div>
+            {/* Elegant fade-out overlay with text */}
+            <div
+              className="pointer-events-none absolute left-0 right-0 bottom-0 h-20 flex items-end justify-center"
+              style={{
+                background: 'linear-gradient(to top, rgba(30,30,40,0.55) 60%, transparent 100%)',
+                borderBottomLeftRadius: '1rem',
+                borderBottomRightRadius: '1rem',
+                zIndex: 10,
+              }}
             >
-              <div 
-                className="w-16 h-16 flex items-center justify-center rounded-xl p-2 mb-2"
-                style={{ 
-                  backgroundColor: `${tech.color}20`,
-                  boxShadow: hoverEffects && hoveredIcon === `reverse-${tech.name}-${index}` ? `0 0 15px ${tech.color}80` : 'none',
-                  transition: 'box-shadow 0.3s ease'
-                }}
-              >
-                <Image 
-                  src={tech.icon} 
-                  alt={tech.name} 
-                  width={40}
-                  height={40}
-                  className="object-contain" 
-                  priority={index < 6}
-                />
-              </div>
-              <span className="text-xs text-white/70">{tech.name}</span>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
+              <span className="text-gray-400 text-xs font-light mb-4 drop-shadow tracking-wide" style={{ letterSpacing: '0.05em' }}>
+                and more...
+              </span>
+            </div>
+          </div>
+      )}
     </div>
   );
 }
