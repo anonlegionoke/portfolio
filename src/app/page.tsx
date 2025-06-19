@@ -93,8 +93,8 @@ export default function Home() {
       <div 
         className={`fixed inset-0 -z-10 bg-gradient-to-br from-blue-500/30 via-purple-500/20 to-pink-500/30`} 
         style={{ 
-          backdropFilter: performanceMode === 'full' ? `blur(${animationSettings.blurIntensity})` : 'none',
-          backgroundColor: performanceMode === 'light' ? 'rgba(30, 41, 59, 0.95)' : undefined
+          backdropFilter: `blur(${animationSettings.blurIntensity})`,
+          // backgroundColor: performanceMode === 'light' ? 'rgba(30, 41, 59, 0.95)' : undefined
         }} 
       />
       
@@ -146,7 +146,7 @@ export default function Home() {
         className="fixed md:sticky md:top-0 bottom-0 left-0 right-0 z-50 flex justify-center items-center py-3 md:py-0 md:h-16"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: performanceMode === 'full' ? 0.5 : 0.2 }}
+        transition={{ duration: performanceMode === 'full' ? 0.5 : 0 }}
       >
         <motion.div 
           className="border border-white/30 flex items-center justify-between gap-2 md:gap-4 mx-auto
@@ -187,10 +187,10 @@ export default function Home() {
       </motion.div>
       <div id="home-section" className="flex justify-between items-center px-2 sm:px-4 md:px-10 mt-15 gap-5">
         <motion.div 
-          className={`${performanceMode === 'full' ? 'backdrop-blur-md bg-white/10' : 'bg-slate-800/90'} p-4 sm:p-6 md:p-8 rounded-2xl shadow-xl border border-white/20 w-full`}
+          className={`${performanceMode === 'full' ? 'backdrop-blur-md bg-white/10' : 'bg-black/20'} p-4 sm:p-6 md:p-8 rounded-2xl shadow-xl border border-white/20 w-full`}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: performanceMode === 'full' ? 0.8 : 0.3 }}
+          transition={{ duration: performanceMode === 'full' ? 0.8 : 0 }}
         >
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white drop-shadow-md">
             Hi, I&apos;m <TypewriterEffect 
@@ -241,7 +241,6 @@ export default function Home() {
         <Project />
       </div>
       <div className="px-2 sm:px-4 md:px-10 my-10">
-        {/* <AnimatedIconsFlow /> */}
         <TechStack />
       </div>
       <div id="experience-section" className="px-2 sm:px-4 md:px-10 my-10">

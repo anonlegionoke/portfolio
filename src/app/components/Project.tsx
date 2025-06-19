@@ -165,9 +165,102 @@ const Project = () => {
     return () => clearInterval(interval);
   }, [isPaused, performanceMode, projects.length]);
 
+  const fullVersion = performanceMode === 'full';
+
+  const animations = {
+    ...(fullVersion && {
+      slideVariants,
+      transition: {
+        x: {
+          type: "tween",
+          ease: "easeOut",
+          duration: 0.4
+        },
+        opacity: { duration: 0.2 }
+      },
+      dragTransition: { bounceStiffness: 100, bounceDamping: 5 },
+      dragElastic: 1,
+      dragConstraints: { left: 0, right: 0 },
+      initial: "enter",
+      animate: "center",
+      exit: "exit",
+    })
+  };  
+
+  const projectContent = (
+    <motion.div 
+    key={currentProject.id}
+    custom={direction}
+    variants={animations.slideVariants}
+    initial={animations.initial}
+    animate={animations.animate}
+    exit={animations.exit}
+    transition={animations.transition}
+    className="flex flex-col md:flex-row gap-8 p-6 bg-black/20 rounded-xl border border-white/10 absolute top-0 left-0 right-0 w-full"
+    drag={performanceMode === 'full' ? 'x' : undefined}
+    dragConstraints={animations.dragConstraints}
+    dragElastic={animations.dragElastic}
+    dragTransition={animations.dragTransition}
+    onDragEnd={handleDragEnd}
+  >
+    {/* Screenshot Area */}
+    <div className="w-full md:w-1/2 relative overflow-hidden rounded-lg border border-white/10">
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+      <div className="w-full h-[200px] md:h-[300px] lg:h-[300px] bg-gray-800 flex items-center justify-center">
+        {currentProject.screenshot ? (
+          <Image 
+            src={currentProject.screenshot} 
+            alt={`${currentProject.name} screenshot`} 
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-contain md:object-cover lg:object-cover"
+            priority={currentIndex === 0}
+          />
+        ) : (
+          <div className="text-white/50">Screenshot</div>
+        )}
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 p-4 text-white z-20">
+        <h3 className="text-xl font-bold">{currentProject.name}</h3>
+      </div>
+    </div>
+
+    {/* Project Details */}
+    <div className="w-full md:w-1/2 flex flex-col justify-between">
+      <div>
+        <div className="mb-4">
+          <h3 className="text-xl font-bold text-white mb-2">{currentProject.name}</h3>
+          <p className="text-white/80">{currentProject.description}</p>
+          <br />
+          <div className="flex gap-4">
+            {currentProject.liveLink && (
+              <a href={currentProject.liveLink} target="_blank" rel="noopener noreferrer" className="hover:underline text-xs flex items-center gap-1 border border-white/10 rounded-xl p-1 text-white"><SquareArrowOutUpRight size={12} />Live</a>
+            )}
+            <a href={currentProject.githubLink} target="_blank" rel="noopener noreferrer" className="hover:underline text-xs flex items-center gap-1 border border-white/10 rounded-xl p-1 text-white"><Github size={12} />Source Code</a>
+          </div>
+        </div>
+
+        <div className="mb-6">
+          <h4 className="text-lg font-semibold text-white mb-2">Tech Stack</h4>
+          <div className="flex flex-wrap gap-2">
+            {currentProject.techStack.map((tech, index) => (
+              <span 
+                key={index} 
+                className="px-3 py-1 bg-white/10 rounded-full text-sm text-white/90"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </motion.div>
+  )
+
   return (
     <motion.div 
-      className={`w-full overflow-hidden py-6 sm:py-8 mt-12 sm:mt-16 ${performanceMode === 'light' ? 'bg-black/20' : 'bg-white/5'} backdrop-blur-sm rounded-2xl shadow-xl border border-white/10 h-[800px] md:h-[550px]`}
+      className={`w-full overflow-hidden py-6 sm:py-8 mt-12 sm:mt-16 'bg-black/20' ${performanceMode === 'full' && 'backdrop-blur-sm'} rounded-2xl shadow-xl border border-white/10 h-[800px] md:h-[550px]`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.2 }}
@@ -201,83 +294,15 @@ const Project = () => {
 
         {/* Project Card with Sliding Animation */}
         <div ref={containerRef} className="relative">
+          {fullVersion ? (
           <AnimatePresence initial={false} custom={direction}>
-            <motion.div 
-              key={currentProject.id}
-              custom={direction}
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{
-                x: { 
-                  type: "tween", 
-                  ease: "easeOut",
-                  duration: 0.4
-                },
-                opacity: { duration: 0.2 }
-              }}
-              className="flex flex-col md:flex-row gap-8 p-6 bg-black/20 rounded-xl border border-white/10 absolute top-0 left-0 right-0 w-full"
-              drag="x"
-              dragConstraints={{ left: 0, right: 0 }}
-              dragElastic={1}
-              dragTransition={{ bounceStiffness: 100, bounceDamping: 5 }}
-              onDragEnd={handleDragEnd}
-            >
-              {/* Screenshot Area */}
-              <div className="w-full md:w-1/2 relative overflow-hidden rounded-lg border border-white/10">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
-                <div className="w-full h-[200px] md:h-[300px] lg:h-[300px] bg-gray-800 flex items-center justify-center">
-                  {currentProject.screenshot ? (
-                    <Image 
-                      src={currentProject.screenshot} 
-                      alt={`${currentProject.name} screenshot`} 
-                      fill
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      className="object-contain md:object-cover lg:object-cover"
-                      priority={currentIndex === 0}
-                    />
-                  ) : (
-                    <div className="text-white/50">Screenshot</div>
-                  )}
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-4 text-white z-20">
-                  <h3 className="text-xl font-bold">{currentProject.name}</h3>
-                </div>
-              </div>
-
-              {/* Project Details */}
-              <div className="w-full md:w-1/2 flex flex-col justify-between">
-                <div>
-                  <div className="mb-4">
-                    <h3 className="text-xl font-bold text-white mb-2">{currentProject.name}</h3>
-                    <p className="text-white/80">{currentProject.description}</p>
-                    <br />
-                    <div className="flex gap-4">
-                      {currentProject.liveLink && (
-                        <a href={currentProject.liveLink} target="_blank" rel="noopener noreferrer" className="hover:underline text-xs flex items-center gap-1 border border-white/10 rounded-xl p-1 text-white"><SquareArrowOutUpRight size={12} />Live</a>
-                      )}
-                      <a href={currentProject.githubLink} target="_blank" rel="noopener noreferrer" className="hover:underline text-xs flex items-center gap-1 border border-white/10 rounded-xl p-1 text-white"><Github size={12} />Source Code</a>
-                    </div>
-                  </div>
-
-                  <div className="mb-6">
-                    <h4 className="text-lg font-semibold text-white mb-2">Tech Stack</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {currentProject.techStack.map((tech, index) => (
-                        <span 
-                          key={index} 
-                          className="px-3 py-1 bg-white/10 rounded-full text-sm text-white/90"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+           {projectContent}
           </AnimatePresence>
+          ) : (
+              <>
+              {projectContent}
+              </>
+          )}
         </div>
       </div>
       {/* Pagination Indicators */}

@@ -114,28 +114,37 @@ const Experience = () => {
     setExpandedId(expandedId === id ? null : id);
   };
 
+  const fullVersion = performanceMode === 'full';
+
   const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
+    ...(fullVersion && {
+      hidden: { opacity: 0 },
+      visible: {
       opacity: 1,
       transition: {
-        staggerChildren: performanceMode === 'full' ? 0.3 : 0.1
-      }
-    }
+        staggerChildren: 0.3
+      }}
+    })
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        type: performanceMode === 'full' ? "spring" : "tween",
-        stiffness: 100,
-        damping: 12,
-        duration: performanceMode === 'full' ? undefined : 0.2
+    },
+    ...(fullVersion && {
+      hidden: { opacity: 0, y: 20 },
+      visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+          type: "spring",
+          stiffness: 100,
+          damping: 12,
+          duration: 0.2
+        }
       }
-    }
+    })
   };
 
   return (
@@ -143,13 +152,13 @@ const Experience = () => {
       className={`w-full overflow-hidden py-6 sm:py-8 mt-12  ${performanceMode === 'light' ? 'bg-black/20' : 'bg-white/5 backdrop-blur-sm'} rounded-2xl shadow-xl border border-white/10`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: performanceMode === 'full' ? 0.8 : 0.3, delay: performanceMode === 'full' ? 0.2 : 0.1 }}
+      transition={{ duration: performanceMode === 'full' ? 0.8 : 0, delay: performanceMode === 'full' ? 0.2 : 0 }}
     >
       <motion.h2
         className="text-2xl sm:text-3xl font-bold text-white text-center mb-8 sm:mb-12 drop-shadow-md"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: performanceMode === 'full' ? 0.5 : 0.2, delay: performanceMode === 'full' ? 0.3 : 0.1 }}
+        transition={{ duration: performanceMode === 'full' ? 0.5 : 0, delay: performanceMode === 'full' ? 0.3 : 0}}
       >
         Experience
       </motion.h2>
@@ -194,10 +203,10 @@ const Experience = () => {
               <motion.div
                 initial={{ height: 0, opacity: 0 }}
                 animate={{
-                  height: expandedId === exp.id ? "auto" : '250px',
+                  height: expandedId === exp.id ? "auto" : '240px',
                   opacity: expandedId === exp.id ? 1 : 0.65
                 }}
-                transition={{ duration: performanceMode === 'full' ? 0.3 : 0.2 }}
+                transition={{ duration: performanceMode === 'full' ? 0.3 : 0 }}
                 className="overflow-hidden"
               >
               <div className="pt-8 border-t border-white/10 m-5">

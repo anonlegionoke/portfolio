@@ -53,18 +53,23 @@ const Connect = () => {
     }
   ]
 
+  const fullVersion = performanceMode === 'full';
+
   const containerVariants = {
-    hidden: { opacity: 0 },
+    ...(fullVersion && {
+      hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
         staggerChildren: performanceMode === 'full' ? 0.1 : 0.05
       }
     }
+    })
   }
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    ...(fullVersion && {
+      hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
@@ -83,6 +88,7 @@ const Connect = () => {
         damping: 10
       }
     } : {}
+    })
   }
 
   return (
@@ -91,7 +97,7 @@ const Connect = () => {
         className="text-2xl sm:text-3xl font-bold text-white text-center mb-6 sm:mb-8 drop-shadow-md"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: performanceMode === 'full' ? 0.5 : 0.2, delay: performanceMode === 'full' ? 0.3 : 0.1 }}
+        transition={{ duration: performanceMode === 'full' ? 0.5 : 0, delay: performanceMode === 'full' ? 0.3 : 0 }}
       >
         Let&apos;s Connect
       </motion.h2>
@@ -102,7 +108,7 @@ const Connect = () => {
             className="text-lg sm:text-xl font-semibold text-white mb-4 sm:mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: performanceMode === 'full' ? 0.5 : 0.2, delay: performanceMode === 'full' ? 0.4 : 0.15 }}
+            transition={{ duration: performanceMode === 'full' ? 0.5 : 0, delay: performanceMode === 'full' ? 0.4 : 0 }}
           >
             Find Me On
           </motion.h3>
