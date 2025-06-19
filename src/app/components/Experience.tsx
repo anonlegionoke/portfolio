@@ -117,6 +117,9 @@ const Experience = () => {
   const fullVersion = performanceMode === 'full';
 
   const containerVariants = {
+    visible: {
+      opacity: 1,
+    },
     ...(fullVersion && {
       hidden: { opacity: 0 },
       visible: {
