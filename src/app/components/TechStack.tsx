@@ -86,7 +86,7 @@ export default function TechStack() {
     <div className={`w-full overflow-hidden ${performanceMode === 'full' ? 'py-10' : 'pt-10'} ${performanceMode === 'full' ? 'backdrop-blur-sm bg-white/5' : 'bg-black/20'} rounded-2xl shadow-xl border border-white/10`}>
       <motion.h2 
         className="text-2xl sm:text-3xl font-bold text-white text-center mb-8 drop-shadow-md"
-        initial={animations.initial}
+        initial={hoverEffects ? animations.initial : {opacity: 1}}
         animate={ animations.animate }
         transition={ animations.transition }
       >
