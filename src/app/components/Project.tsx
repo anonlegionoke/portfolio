@@ -172,7 +172,7 @@ const Project = () => {
       slideVariants,
       transition: {
         x: {
-          type: "tween",
+          type: "linear",
           ease: "easeOut",
           duration: 0.4
         },
@@ -205,7 +205,6 @@ const Project = () => {
   >
     {/* Screenshot Area */}
     <div className="w-full md:w-1/2 relative overflow-hidden rounded-lg border border-white/10">
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
       <div className="w-full h-[200px] md:h-[300px] lg:h-[300px] bg-gray-800 flex items-center justify-center">
         {currentProject.screenshot ? (
           <Image 
@@ -260,7 +259,7 @@ const Project = () => {
 
   return (
     <motion.div 
-      className={`w-full overflow-hidden py-6 sm:py-8 mt-12 sm:mt-16 'bg-black/20' ${performanceMode === 'full' && 'backdrop-blur-sm'} rounded-2xl shadow-xl border border-white/10 h-[800px] md:h-[550px]`}
+      className={`w-full overflow-hidden py-6 sm:py-8 mt-12 sm:mt-16 rounded-2xl shadow-xl border border-white/10 h-[800px] md:h-[550px]`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.2 }}

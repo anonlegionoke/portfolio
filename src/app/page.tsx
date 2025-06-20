@@ -64,13 +64,6 @@ export default function Home() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
-  const animationSettings = {
-    enabled: performanceMode === 'full',
-    blurIntensity: performanceMode === 'full' ? '100px' : '0px',
-    blurOpacity: performanceMode === 'full' ? 1 : 0,
-    animationDuration: performanceMode === 'full' ? { slow: 25, medium: 20, fast: 15 } : { slow: 0, medium: 0, fast: 0 }
-  };
-  
   return (
     <main className="relative min-h-screen overflow-hidden">
       {/* Loading Overlay */}
@@ -92,55 +85,7 @@ export default function Home() {
       
       <div 
         className={`fixed inset-0 -z-10 bg-gradient-to-br from-blue-500/30 via-purple-500/20 to-pink-500/30`} 
-        style={{ 
-          backdropFilter: `blur(${animationSettings.blurIntensity})`,
-          // backgroundColor: performanceMode === 'light' ? 'rgba(30, 41, 59, 0.95)' : undefined
-        }} 
       />
-      
-      {animationSettings.enabled && (
-        <>
-          <motion.div 
-            className="fixed top-20 left-20 w-[500px] h-[500px] rounded-full bg-blue-400/20 blur-3xl -z-10" 
-            animate={{ 
-              x: [0, 30, 0], 
-              y: [0, 15, 0],
-              scale: [1, 1.05, 1]
-            }}
-            transition={{ 
-              repeat: Infinity, 
-              duration: animationSettings.animationDuration.medium,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.div 
-            className="fixed bottom-20 right-20 w-[600px] h-[600px] rounded-full bg-purple-400/20 blur-3xl -z-10" 
-            animate={{ 
-              x: [0, -20, 0], 
-              y: [0, -20, 0],
-              scale: [1, 1.03, 1]
-            }}
-            transition={{ 
-              repeat: Infinity, 
-              duration: animationSettings.animationDuration.fast,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.div 
-            className="fixed top-1/2 left-1/3 w-[400px] h-[400px] rounded-full bg-pink-400/20 blur-3xl -z-10" 
-            animate={{ 
-              x: [0, 15, 0], 
-              y: [0, -25, 0],
-              scale: [1, 1.08, 1]
-            }}
-            transition={{ 
-              repeat: Infinity, 
-              duration: animationSettings.animationDuration.slow,
-              ease: "easeInOut"
-            }}
-          />
-        </>
-      )}
       
       <motion.div 
         className="fixed md:sticky md:top-0 bottom-0 left-0 right-0 z-50 flex justify-center items-center py-3 md:py-0 md:h-16"
@@ -150,7 +95,7 @@ export default function Home() {
       >
         <motion.div 
           className="border border-white/30 flex items-center justify-between gap-2 md:gap-4 mx-auto
-          rounded-full py-0.5 px-1 bg-black/20 backdrop-blur-md shadow-lg"
+          rounded-full py-0.5 px-1 bg-black/70 md:bg-black/40 shadow-lg"
           whileHover={performanceMode === 'full' ? { boxShadow: "0 0 15px rgba(255, 255, 255, 0.2)" } : {}}
         >
           <button 
@@ -187,7 +132,7 @@ export default function Home() {
       </motion.div>
       <div id="home-section" className="flex justify-between items-center px-2 sm:px-4 md:px-10 mt-15 gap-5">
         <motion.div 
-          className={`${performanceMode === 'full' ? 'backdrop-blur-md bg-white/10' : 'bg-black/20'} p-4 sm:p-6 md:p-8 rounded-2xl shadow-xl border border-white/20 w-full`}
+          className={`${performanceMode === 'full' ? ' bg-white/10' : 'bg-black/20'} p-4 sm:p-6 md:p-8 rounded-2xl shadow-xl border border-white/20 w-full`}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: performanceMode === 'full' ? 0.8 : 0 }}
@@ -228,14 +173,6 @@ export default function Home() {
             </motion.button>
           </div>
         </motion.div>
-        {/* <motion.div 
-          className="relative backdrop-blur-sm bg-white/5 p-10 rounded-2xl shadow-xl border border-white/10 w-[30%]"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-        >
-          <ImageCarousel />
-        </motion.div> */}
       </div>
       <div id="projects-section" className="px-2 sm:px-4 md:px-10 my-10">
         <Project />
@@ -254,7 +191,7 @@ export default function Home() {
       <AnimatePresence>
         {showScrollTop && (
           <motion.button
-            className="fixed bottom-8 right-4 sm:right-8 p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg cursor-pointer z-50"
+            className="fixed bottom-8 right-4 sm:right-8 p-3 rounded-full bg-white/20 border border-white/20 shadow-lg cursor-pointer z-50"
             onClick={scrollToTop}
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}

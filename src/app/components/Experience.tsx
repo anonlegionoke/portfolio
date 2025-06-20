@@ -152,7 +152,7 @@ const Experience = () => {
 
   return (
     <motion.div
-      className={`w-full overflow-hidden py-6 sm:py-8 mt-12  ${performanceMode === 'light' ? 'bg-black/20' : 'bg-white/5 backdrop-blur-sm'} rounded-2xl shadow-xl border border-white/10`}
+      className={`w-full overflow-hidden py-6 sm:py-8 mt-12  ${performanceMode === 'light' ? 'bg-black/20' : 'bg-white/5'} rounded-2xl shadow-xl border border-white/10`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: performanceMode === 'full' ? 0.8 : 0, delay: performanceMode === 'full' ? 0.2 : 0 }}

@@ -95,7 +95,7 @@ const Connect = () => {
   }
 
   return (
-    <div className={`${performanceMode === 'light' ? 'bg-black/20' : 'bg-white/5 backdrop-blur-sm'} rounded-2xl shadow-xl border border-white/10 p-4 sm:p-6 md:p-8`}>
+    <div className={`${performanceMode === 'light' ? 'bg-black/20' : 'bg-white/5'} rounded-2xl shadow-xl border border-white/10 p-4 sm:p-6 md:p-8`}>
       <motion.h2 
         className="text-2xl sm:text-3xl font-bold text-white text-center mb-6 sm:mb-8 drop-shadow-md"
         initial={{ opacity: 0 }}
@@ -113,7 +113,7 @@ const Connect = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: performanceMode === 'full' ? 0.5 : 0, delay: performanceMode === 'full' ? 0.4 : 0 }}
           >
-            Find Me On
+            Find me on
           </motion.h3>
           
           <motion.div

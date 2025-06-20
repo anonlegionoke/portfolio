@@ -47,10 +47,6 @@ export default function TechStack() {
     ? techIcons.slice(0, 15) 
     : techIcons;
 
-  const duplicatedIcons = performanceMode === 'full' 
-    ? [...displayIcons, ...displayIcons, ...displayIcons] 
-    : [...displayIcons];
-
   const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
 
   const animationDuration = 15;
@@ -83,7 +79,7 @@ export default function TechStack() {
   }
 
   return (
-    <div className={`w-full overflow-hidden ${performanceMode === 'full' ? 'py-10' : 'pt-10'} ${performanceMode === 'full' ? 'backdrop-blur-sm bg-white/5' : 'bg-black/20'} rounded-2xl shadow-xl border border-white/10`}>
+    <div className={`w-full overflow-hidden ${performanceMode === 'full' ? 'py-10' : 'pt-10'} ${performanceMode === 'full' ? 'bg-white/5' : 'bg-black/20'} rounded-2xl shadow-xl border border-white/10`}>
       <motion.h2 
         className="text-2xl sm:text-3xl font-bold text-white text-center mb-8 drop-shadow-md"
         initial={hoverEffects ? animations.initial : {opacity: 1}}
@@ -94,14 +90,14 @@ export default function TechStack() {
       </motion.h2>
       
       {hoverEffects ? (
-       <div className="relative">
+       <div className="relative w-1/2">
        {/* First row - moving right */}
        <motion.div 
          className="flex space-x-12 mb-8"
          animate={animations.divAnimate1}
          transition={animations.divTransition1}
        >
-         {duplicatedIcons.map((tech, index) => (
+         {displayIcons.map((tech, index) => (
            <motion.div 
              key={`${tech.name}-${index}`}
              className="flex flex-col items-center justify-center w-20"
@@ -110,7 +106,7 @@ export default function TechStack() {
              onHoverEnd={() => hoverEffects && setHoveredIcon(null)}
            >
              <div 
-               className="w-16 h-16 flex items-center justify-center rounded-xl p-2 mb-2"
+               className="w-14 h-14 flex items-center justify-center rounded-xl p-2 mb-2"
                style={{ 
                  backgroundColor: `${tech.color}20`,
                  boxShadow: hoverEffects && hoveredIcon === tech.name + index ? `0 0 15px ${tech.color}80` : 'none',
@@ -120,13 +116,13 @@ export default function TechStack() {
                <Image 
                  src={tech.icon} 
                  alt={tech.name} 
-                 width={40}
-                 height={40}
+                 width={30}
+                 height={30}
                  className="object-contain" 
                  priority={index < 6}
                />
              </div>
-             <span className="text-xs text-white/70">{tech.name}</span>
+             <span className="text-white/70" style={{fontSize:'11px'}}>{tech.name}</span>
            </motion.div>
          ))}
        </motion.div>
@@ -137,7 +133,7 @@ export default function TechStack() {
          animate={animations.divAnimate2}
          transition={animations.divTransition2}
        >
-         {duplicatedIcons.slice().reverse().map((tech, index) => (
+         {displayIcons.slice().reverse().map((tech, index) => (
            <motion.div 
              key={`reverse-${tech.name}-${index}`}
              className="flex flex-col items-center justify-center w-20"
@@ -146,7 +142,7 @@ export default function TechStack() {
              onHoverEnd={() => hoverEffects && setHoveredIcon(null)}
            >
              <div 
-               className="w-16 h-16 flex items-center justify-center rounded-xl p-2 mb-2"
+               className="w-14 h-14 flex items-center justify-center rounded-xl p-2 mb-2"
                style={{ 
                  backgroundColor: `${tech.color}20`,
                  boxShadow: hoverEffects && hoveredIcon === `reverse-${tech.name}-${index}` ? `0 0 15px ${tech.color}80` : 'none',
@@ -156,20 +152,20 @@ export default function TechStack() {
                <Image 
                  src={tech.icon} 
                  alt={tech.name} 
-                 width={40}
-                 height={40}
+                 width={30}
+                 height={30}
                  className="object-contain" 
                  priority={index < 6}
                />
              </div>
-             <span className="text-xs text-white/70">{tech.name}</span>
+             <span className="text-white/70" style={{fontSize:'11px'}}>{tech.name}</span>
            </motion.div>
          ))}
        </motion.div>
      </div>
       ) : (
           <div className="relative">
-            <div className="grid grid-cols-4 lg:grid-cols-12 gap-4 max-h-84 p-4 rounded-xl"
+            <div className="grid grid-cols-4 lg:grid-cols-10 gap-4 lg:gap-8 max-h-84 p-4 rounded-xl"
             >
               {techIcons.map((tech, index) => (
                 <div 
