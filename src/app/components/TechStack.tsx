@@ -122,7 +122,7 @@ export default function TechStack() {
                  priority={index < 6}
                />
              </div>
-             <span className="text-white/70" style={{fontSize:'11px'}}>{tech.name}</span>
+             <span className="text-white/70 text-center text-nowrap" style={{fontSize:'11px'}}>{tech.name}</span>
            </motion.div>
          ))}
        </motion.div>
@@ -158,7 +158,7 @@ export default function TechStack() {
                  priority={index < 6}
                />
              </div>
-             <span className="text-white/70" style={{fontSize:'11px'}}>{tech.name}</span>
+             <span className="text-white/70 text-center text-nowrap" style={{fontSize:'11px'}}>{tech.name}</span>
            </motion.div>
          ))}
        </motion.div>
