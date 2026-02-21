@@ -154,7 +154,7 @@ export default function Home() {
               whileTap={performanceMode === 'full' ? { scale: 0.95 } : {}}
               onClick={() => {
                 const link = document.createElement('a');
-                link.href = '/data/SabirResume-05-25.pdf';
+                link.href = '/data/SabirResume.pdf';
                 link.download = 'Sabir_Resume.pdf';
                 document.body.appendChild(link);
                 link.click();
