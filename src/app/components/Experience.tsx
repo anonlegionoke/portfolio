@@ -37,31 +37,36 @@ const Experience = () => {
       role: "Software Engineer",
       duration: "Jan 2024 - Present",
       role1: {
-        title: "Junior Software Engineer",
+        title: "Frontend Engineer",
         period: "Jan 2024 - Jun 2024",
         sections: [
           {
-            title: "Feature Development",
+            title: "Frontend Architecture",
             items: [
-              "Developed interactive Dashboard using <strong>Recharts</strong> with dynamic data visualization based on user's local timezone.",
+              "Revamped the legacy application with a modern React and Material UI stack, building interactive <strong>Recharts</strong> dashboards with dynamic timezone ",
               "Built a comprehensive <strong>contact activity timeline</strong> with supporting backend: database schema, REST APIs, and service logic.",
-              "Implemented Campaigns Management UI for campaign creation, tracking, and analysis.",
-              "Designed advanced search and filtering for <strong>1M+ contacts</strong> in Cassandra DB with efficient data retrieval.",
+              "Implemented Campaigns Management UI for campaign creation, tracking, and analysis.",              
             ]
           },
           {
-            title: "UI Development",
+            title: "Full-Stack Transition",
             items: [
-              "Revamped the company app with a modern UI using <strong>Material UI</strong> and React for improved user experience.",
+              "Designed advanced search capabilities for 1M+ contacts, independently building the supporting backend architecture including REST APIs, service logic, and Cassandra DB schemas.",
               "Modernized legacy UI components including Call Logs, Contacts, and Call Flow.",
               "Created reusable custom UI components: Country/State dropdowns and international phone input fields.",
+            ]
+          },
+          {
+            title: "Feature Delivery",
+            items: [
+              "Engineered a comprehensive Campaigns Management UI and a production soft-phone interface with integrated call controls, live transcription, and end-to-end backend routing.",
             ]
           }
         ]
       },
       role2: {
         title: "Software Engineer",
-        period: "Jun 2024 - Present",
+        period: "Jul 2024 - Present",
         sections: [
           {
             title: "Backend & Distributed Systems",
