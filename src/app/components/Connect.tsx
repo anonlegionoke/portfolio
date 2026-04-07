@@ -34,12 +34,6 @@ const Connect = () => {
       color: "#D44638"
     },
     {
-      name: "Twitter/X",
-      icon: <Twitter size={22} />,
-      url: "https://x.com/sabirpm_",
-      color: "#1DA1F2"
-    },
-    {
       name: "LeetCode",
       icon: <SiLeetcode size={22} />,
       url: "https://leetcode.com/anonlegio",
