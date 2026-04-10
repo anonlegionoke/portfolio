@@ -3,17 +3,18 @@
 import { House, PanelsTopLeft, ChartNoAxesGantt, Handshake, Tally1, ArrowUp } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Project from './components/Project';
-import Connect from './components/Connect';
-import Experience from './components/Experience';
-import TechStack from './components/TechStack';
+import dynamic from 'next/dynamic';
 import PerformanceToggle from './components/PerformanceToggle';
+
+const Project = dynamic(() => import('./components/Project'));
+const Connect = dynamic(() => import('./components/Connect'));
+const Experience = dynamic(() => import('./components/Experience'));
+const TechStack = dynamic(() => import('./components/TechStack'));
+
 import { usePerformance } from './context/PerformanceContext';
 import TypewriterEffect from './components/TypewriterEffect';
 
-export default function Home() {
-  const [showScrollTop, setShowScrollTop] = useState(false);
-  const { performanceMode } = usePerformance();
+function LoadingOverlay() {
   const [loading, setLoading] = useState(true);
   const [loadingText, setLoadingText] = useState("Just a sec...");
 
@@ -36,6 +37,29 @@ export default function Home() {
       clearInterval(textInterval);
     };
   }, []);
+
+  if (!loading) return null;
+
+  return (
+    <div className="fixed inset-0 bg-slate-900 flex flex-col items-center justify-center z-50">
+      <div className="relative w-24 h-24 mb-8">
+        <div className="w-24 h-24 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
+        <div className="w-24 h-24 border-r-4 border-purple-500 border-solid rounded-full animate-spin absolute top-0 left-0" style={{ animationDuration: '1.5s' }}></div>
+        <div className="w-24 h-24 border-b-4 border-pink-500 border-solid rounded-full animate-spin absolute top-0 left-0" style={{ animationDuration: '2s' }}></div>
+      </div>
+      <h2 className="text-2xl font-bold text-white">{loadingText}</h2>
+      <div className="flex space-x-2 mt-4">
+        <div className="w-3 h-3 rounded-full bg-blue-500 animate-pulse"></div>
+        <div className="w-3 h-3 rounded-full bg-purple-500 animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+        <div className="w-3 h-3 rounded-full bg-pink-500 animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+      </div>
+    </div>
+  );
+}
+
+export default function Home() {
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const { performanceMode } = usePerformance();
 
   const scrollToSection = (elementId: string) => {
     const element = document.getElementById(elementId);
@@ -67,21 +91,7 @@ export default function Home() {
   return (
     <main className="relative min-h-screen overflow-hidden">
       {/* Loading Overlay */}
-      {loading && (
-        <div className="fixed inset-0 bg-slate-900 flex flex-col items-center justify-center z-50">
-          <div className="relative w-24 h-24 mb-8">
-            <div className="w-24 h-24 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
-            <div className="w-24 h-24 border-r-4 border-purple-500 border-solid rounded-full animate-spin absolute top-0 left-0" style={{ animationDuration: '1.5s' }}></div>
-            <div className="w-24 h-24 border-b-4 border-pink-500 border-solid rounded-full animate-spin absolute top-0 left-0" style={{ animationDuration: '2s' }}></div>
-          </div>
-          <h2 className="text-2xl font-bold text-white">{loadingText}</h2>
-          <div className="flex space-x-2 mt-4">
-            <div className="w-3 h-3 rounded-full bg-blue-500 animate-pulse"></div>
-            <div className="w-3 h-3 rounded-full bg-purple-500 animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-            <div className="w-3 h-3 rounded-full bg-pink-500 animate-pulse" style={{ animationDelay: '0.4s' }}></div>
-          </div>
-        </div>
-      )}
+      <LoadingOverlay />
 
       <div
         className={`fixed inset-0 -z-10 bg-gradient-to-br from-blue-500/30 via-purple-500/20 to-pink-500/30`}

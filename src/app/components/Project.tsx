@@ -14,91 +14,91 @@ interface ProjectData {
   techStack: string[]
 }
 
-const Project = () => {
-  const projects: ProjectData[] = [
-    {
-      id: 1,
-      name: "Angle | AI Animation Studio",
-      description: "A full-stack AI application that generates 3Blue1Brown-style math animations from natural language prompts, with a browser-based video editor for trimming, multi-track audio mixing, and MP4 export. Rendering is automated through GitHub Actions pipelines with Supabase for storage and real-time delivery.",
-      screenshot: "/screenshots/angle-video-maker3.png",
-      liveLink: "https://angle-alpha.vercel.app/",
-      githubLink: "https://github.com/anonlegionoke/angle",
-      techStack: ["Next.js", "React", "TypeScript", "Python", "Tailwind CSS", "FFmpeg", "Manim", "Supabase", "GitHub Actions"]
-    },
-    {
-      id: 2,
-      name: "Chat with AI-RAG",
-      description: "An AI chat application with 3 modes — quick chat (stateless), memory chat (context-aware), and document Q&A (PDF/JSON upload) — using RAG with LangChain for document chunking, embedding, and similarity search.",
-      screenshot: "/screenshots/ai-rag-chat-1.png",
-      liveLink: "https://chat-with-ai-rag.vercel.app/",
-      githubLink: "https://github.com/anonlegionoke/Chat-with-AI-RAG",
-      techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "LangChain", "Gemini"]
-    },
-    {
-      id: 3,
-      name: "Crypto Gate",
-      description: "A crypto payment gateway enabling merchants to accept any SPL token with automatic USDC conversion via Jupiter aggregator on Solana, featuring real-time payment detection and a merchant dashboard for balance monitoring, transaction history, and settlement tracking.",
-      screenshot: "/screenshots/crypto-gate.png",
-      liveLink: undefined,
-      githubLink: "https://github.com/anonlegionoke/crypto-pay-gateway",
-      techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Jupiter", "Solana", "PostgreSQL", "Prisma", "Docker"]
-    },
-    {
-      id: 4,
-      name: "Blog App",
-      description: "A React-based blog app powered by Appwrite, featuring rich text editing, image uploads, post management, and user authentication with synced access across devices.",
-      screenshot: "/screenshots/blog-app.png",
-      liveLink: undefined,
-      githubLink: "https://github.com/anonlegionoke/react/tree/main/11blogapp",
-      techStack: ["React", "TypeScript", "Tailwind CSS", "Appwrite", "TinyMCE",]
-    },
-    {
-      id: 5,
-      name: "Movie Review App",
-      description: "A movie review app using the TMDb API, allowing users to browse movies, search titles, read and contribute reviews with full create, update, and delete support.",
-      screenshot: "/screenshots/movie-review-app.png",
-      liveLink: undefined,
-      githubLink: "https://github.com/anonlegionoke/Blockbuster-Review-App",
-      techStack: ["JavaScript", "HTML", "CSS", "Node.js", "Express", "MongoDB"]
-    },
-    {
-      id: 6,
-      name: "Todo Lister",
-      description: "Console Todo App in C++ that generates a random ID for each task, allowing users to add and mark tasks as completed.",
-      screenshot: "/screenshots/todo-lister.png",
-      liveLink: undefined,
-      githubLink: "https://github.com/anonlegionoke/Console-Todo",
-      techStack: ["C++"]
-    },
-    {
-      id: 7,
-      name: "Blockbuster | The Movie Store",
-      description: "Landing page for the Blockbuster Movie Store website if they were still around today.",
-      screenshot: "/screenshots/blockbuster.png",
-      liveLink: undefined,
-      githubLink: "https://github.com/anonlegionoke/Blockbuster",
-      techStack: ["HTML", "CSS", "JavaScript"]
-    },
-    {
-      id: 8,
-      name: "Greeting on Panel",
-      description: "A simple and efficient extension to display greetings based on time of the day on the GNOME desktop environment top panel.",
-      screenshot: "/screenshots/gnome-extension.png",
-      liveLink: undefined,
-      githubLink: "https://github.com/anonlegionoke/greetings-on-panel",
-      techStack: ["JavaScript", "Gnome-Shell"]
-    },
-    {
-      id: 9,
-      name: "Loop Texts on Panel",
-      description: "A customizable GNOME extension that displays any text—such as reminders or quick notes—on the top panel, with support for looping messages for continuous visibility.",
-      screenshot: "/screenshots/gnome-extension.png",
-      liveLink: undefined,
-      githubLink: "https://github.com/anonlegionoke/loop-texts-on-panel",
-      techStack: ["JavaScript", "Gnome-Shell"]
-    }
-  ];
+const projects: ProjectData[] = [
+  {
+    id: 1,
+    name: "Angle | AI Animation Studio",
+    description: "A full-stack AI application that generates 3Blue1Brown-style math animations from natural language prompts, with a browser-based video editor for trimming, multi-track audio mixing, and MP4 export. Rendering is automated through GitHub Actions pipelines with Supabase for storage and real-time delivery.",
+    screenshot: "/screenshots/angle-video-maker3.png",
+    liveLink: "https://angle-alpha.vercel.app/",
+    githubLink: "https://github.com/anonlegionoke/angle",
+    techStack: ["Next.js", "React", "TypeScript", "Python", "Tailwind CSS", "FFmpeg", "Manim", "Supabase", "GitHub Actions"]
+  },
+  {
+    id: 2,
+    name: "Chat with AI-RAG",
+    description: "An AI chat application with 3 modes — quick chat (stateless), memory chat (context-aware), and document Q&A (PDF/JSON upload) — using RAG with LangChain for document chunking, embedding, and similarity search.",
+    screenshot: "/screenshots/ai-rag-chat-1.png",
+    liveLink: "https://chat-with-ai-rag.vercel.app/",
+    githubLink: "https://github.com/anonlegionoke/Chat-with-AI-RAG",
+    techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "LangChain", "Gemini"]
+  },
+  {
+    id: 3,
+    name: "Crypto Gate",
+    description: "A crypto payment gateway enabling merchants to accept any SPL token with automatic USDC conversion via Jupiter aggregator on Solana, featuring real-time payment detection and a merchant dashboard for balance monitoring, transaction history, and settlement tracking.",
+    screenshot: "/screenshots/crypto-gate.png",
+    liveLink: undefined,
+    githubLink: "https://github.com/anonlegionoke/crypto-pay-gateway",
+    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Jupiter", "Solana", "PostgreSQL", "Prisma", "Docker"]
+  },
+  {
+    id: 4,
+    name: "Blog App",
+    description: "A React-based blog app powered by Appwrite, featuring rich text editing, image uploads, post management, and user authentication with synced access across devices.",
+    screenshot: "/screenshots/blog-app.png",
+    liveLink: undefined,
+    githubLink: "https://github.com/anonlegionoke/react/tree/main/11blogapp",
+    techStack: ["React", "TypeScript", "Tailwind CSS", "Appwrite", "TinyMCE",]
+  },
+  {
+    id: 5,
+    name: "Movie Review App",
+    description: "A movie review app using the TMDb API, allowing users to browse movies, search titles, read and contribute reviews with full create, update, and delete support.",
+    screenshot: "/screenshots/movie-review-app.png",
+    liveLink: undefined,
+    githubLink: "https://github.com/anonlegionoke/Blockbuster-Review-App",
+    techStack: ["JavaScript", "HTML", "CSS", "Node.js", "Express", "MongoDB"]
+  },
+  {
+    id: 6,
+    name: "Todo Lister",
+    description: "Console Todo App in C++ that generates a random ID for each task, allowing users to add and mark tasks as completed.",
+    screenshot: "/screenshots/todo-lister.png",
+    liveLink: undefined,
+    githubLink: "https://github.com/anonlegionoke/Console-Todo",
+    techStack: ["C++"]
+  },
+  {
+    id: 7,
+    name: "Blockbuster | The Movie Store",
+    description: "Landing page for the Blockbuster Movie Store website if they were still around today.",
+    screenshot: "/screenshots/blockbuster.png",
+    liveLink: undefined,
+    githubLink: "https://github.com/anonlegionoke/Blockbuster",
+    techStack: ["HTML", "CSS", "JavaScript"]
+  },
+  {
+    id: 8,
+    name: "Greeting on Panel",
+    description: "A simple and efficient extension to display greetings based on time of the day on the GNOME desktop environment top panel.",
+    screenshot: "/screenshots/gnome-extension.png",
+    liveLink: undefined,
+    githubLink: "https://github.com/anonlegionoke/greetings-on-panel",
+    techStack: ["JavaScript", "Gnome-Shell"]
+  },
+  {
+    id: 9,
+    name: "Loop Texts on Panel",
+    description: "A customizable GNOME extension that displays any text—such as reminders or quick notes—on the top panel, with support for looping messages for continuous visibility.",
+    screenshot: "/screenshots/gnome-extension.png",
+    liveLink: undefined,
+    githubLink: "https://github.com/anonlegionoke/loop-texts-on-panel",
+    techStack: ["JavaScript", "Gnome-Shell"]
+  }
+];
 
+const Project = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [direction, setDirection] = useState(0);

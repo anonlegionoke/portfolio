@@ -29,82 +29,82 @@ interface ExperienceItem {
   logo?: string;
 }
 
-const Experience = () => {
-  const experiences: ExperienceItem[] = [
-    {
-      id: 1,
-      company: "Bistux Solutions Pvt. Ltd.",
-      role: "Software Engineer",
-      duration: "Jan 2024 - Present",
-      role1: {
-        title: "Frontend Engineer",
-        period: "Jan 2024 - Jun 2024",
-        sections: [
-          {
-            title: "Frontend Architecture",
-            items: [
-              "Revamped the legacy application with a modern React and Material UI stack, building interactive <strong>Recharts</strong> dashboards with dynamic timezone ",
-              "Built a comprehensive <strong>contact activity timeline</strong> with supporting backend: database schema, REST APIs, and service logic.",
-              "Implemented Campaigns Management UI for campaign creation, tracking, and analysis.",              
-            ]
-          },
-          {
-            title: "Full-Stack Transition",
-            items: [
-              "Designed advanced search capabilities for 1M+ contacts, independently building the supporting backend architecture including REST APIs, service logic, and Cassandra DB schemas.",
-              "Modernized legacy UI components including Call Logs, Contacts, and Call Flow.",
-              "Created reusable custom UI components: Country/State dropdowns and international phone input fields.",
-            ]
-          },
-          {
-            title: "Feature Delivery",
-            items: [
-              "Engineered a comprehensive Campaigns Management UI and a production soft-phone interface with integrated call controls, live transcription, and end-to-end backend routing.",
-            ]
-          }
-        ]
-      },
-      role2: {
-        title: "Software Engineer",
-        period: "Jul 2024 - Present",
-        sections: [
-          {
-            title: "Backend & Distributed Systems",
-            items: [
-              "Architected and developed <strong>multi-instance microservices</strong> for SIP call routing, implementing <strong>round-robin</strong> and <strong>sticky-agent assignment</strong> with race condition handling via <strong>Cassandra lightweight transactions</strong>.",
-              "Built a <strong>distributed job scheduler with sharding</strong> across multiple service instances, ensuring reliable scheduled campaign execution using <strong>Cassandra</strong> as the coordination backbone.",
-              "Designed an <strong>event-driven notification system</strong> using <strong>RabbitMQ</strong>, <strong>WebSockets</strong>, and <strong>webhooks</strong>, supporting real-time SIP calls, live transcription, and multi-channel delivery.",
-              "Engineered a <strong>multi-instance campaign service</strong> with contact pool management, retry logic, and configurable scheduling, orchestrating outreach across <strong>1M+ contacts</strong>.",
-              "Achieved <strong>100% accuracy</strong> and consistency in call logging across normalized <strong>Cassandra</strong> tables, handling over <strong>100,000 entries daily</strong>.",
-              "Migrated <strong>20+ Cassandra tables</strong> (several with <strong>15M+ rows</strong>) using <strong>DSBulk</strong> and custom <strong>Node.js</strong> automation scripts for schema creation and SAI index provisioning, achieving zero-downtime data migration.",
-            ]
-          },
-          {
-            title: "Frontend & Full-Stack",
-            items: [
-              "Rebuilt the company dashboard in <strong>React</strong> and <strong>TypeScript</strong>, rendering real-time and aggregated metrics (hourly/daily/monthly) with automatic timezone conversion, reducing initial load time by <strong>43%</strong>.",
-              "Improved <strong>Call Flow</strong> performance by over <strong>58%</strong> and optimized rendering using <strong>React Flow</strong>.",
-              "Developed a production <strong>soft-phone UI</strong> with call controls, call logs, live transcription, and contact management, integrated end-to-end with backend call-routing services.",
-              "Integrated <strong>AWS Media Services</strong> for audio processing and developed UI with waveform visualizations.",
-              "Implemented a <strong>contact activity timeline</strong> with timestamped logs, call playback, transcription, and notes, backed by <strong>Cassandra</strong> with efficient cursor-based pagination.",
-            ]
-          },
-          {
-            title: "DevOps & Leadership",
-            items: [
-              "Managed <strong>containerized deployments</strong> with <strong>Docker Swarm</strong>, including Dockerfile authoring, multi-service orchestration, and <strong>CI/CD pipelines</strong> for automated build and deploy workflows.",
-              "Led cross-functional meetings with customer support to develop the <strong>Sticky Agent</strong> feature based on user feedback.",
-              "Mentored junior developers and contributed to sprint planning and project management.",
-            ]
-          }
-        ]
-      },
-      projects: [],
-      technologies: ["TypeScript", "React", "Next.js", "Node.js", "NestJS", "Cassandra", "PostgreSQL", "RabbitMQ", "WebSockets", "Docker", "Material UI", "Redux", "Nginx", "AWS", "SIP.js", "Git"],
-      logo: "/logos/tech-innovations.svg"
-    }
-  ];
+const experiences: ExperienceItem[] = [
+  {
+    id: 1,
+    company: "Bistux Solutions Pvt. Ltd.",
+    role: "Software Engineer",
+    duration: "Jan 2024 - Present",
+    role1: {
+      title: "Frontend Engineer",
+      period: "Jan 2024 - Jun 2024",
+      sections: [
+        {
+          title: "Frontend Architecture",
+          items: [
+            "Revamped the legacy application with a modern React and Material UI stack, building interactive <strong>Recharts</strong> dashboards with dynamic timezone ",
+            "Built a comprehensive <strong>contact activity timeline</strong> with supporting backend: database schema, REST APIs, and service logic.",
+            "Implemented Campaigns Management UI for campaign creation, tracking, and analysis.",              
+          ]
+        },
+        {
+          title: "Full-Stack Transition",
+          items: [
+            "Designed advanced search capabilities for 1M+ contacts, independently building the supporting backend architecture including REST APIs, service logic, and Cassandra DB schemas.",
+            "Modernized legacy UI components including Call Logs, Contacts, and Call Flow.",
+            "Created reusable custom UI components: Country/State dropdowns and international phone input fields.",
+          ]
+        },
+        {
+          title: "Feature Delivery",
+          items: [
+            "Engineered a comprehensive Campaigns Management UI and a production soft-phone interface with integrated call controls, live transcription, and end-to-end backend routing.",
+          ]
+        }
+      ]
+    },
+    role2: {
+      title: "Software Engineer",
+      period: "Jul 2024 - Present",
+      sections: [
+        {
+          title: "Backend & Distributed Systems",
+          items: [
+            "Architected and developed <strong>multi-instance microservices</strong> for SIP call routing, implementing <strong>round-robin</strong> and <strong>sticky-agent assignment</strong> with race condition handling via <strong>Cassandra lightweight transactions</strong>.",
+            "Built a <strong>distributed job scheduler with sharding</strong> across multiple service instances, ensuring reliable scheduled campaign execution using <strong>Cassandra</strong> as the coordination backbone.",
+            "Designed an <strong>event-driven notification system</strong> using <strong>RabbitMQ</strong>, <strong>WebSockets</strong>, and <strong>webhooks</strong>, supporting real-time SIP calls, live transcription, and multi-channel delivery.",
+            "Engineered a <strong>multi-instance campaign service</strong> with contact pool management, retry logic, and configurable scheduling, orchestrating outreach across <strong>1M+ contacts</strong>.",
+            "Achieved <strong>100% accuracy</strong> and consistency in call logging across normalized <strong>Cassandra</strong> tables, handling over <strong>100,000 entries daily</strong>.",
+            "Migrated <strong>20+ Cassandra tables</strong> (several with <strong>15M+ rows</strong>) using <strong>DSBulk</strong> and custom <strong>Node.js</strong> automation scripts for schema creation and SAI index provisioning, achieving zero-downtime data migration.",
+          ]
+        },
+        {
+          title: "Frontend & Full-Stack",
+          items: [
+            "Rebuilt the company dashboard in <strong>React</strong> and <strong>TypeScript</strong>, rendering real-time and aggregated metrics (hourly/daily/monthly) with automatic timezone conversion, reducing initial load time by <strong>43%</strong>.",
+            "Improved <strong>Call Flow</strong> performance by over <strong>58%</strong> and optimized rendering using <strong>React Flow</strong>.",
+            "Developed a production <strong>soft-phone UI</strong> with call controls, call logs, live transcription, and contact management, integrated end-to-end with backend call-routing services.",
+            "Integrated <strong>AWS Media Services</strong> for audio processing and developed UI with waveform visualizations.",
+            "Implemented a <strong>contact activity timeline</strong> with timestamped logs, call playback, transcription, and notes, backed by <strong>Cassandra</strong> with efficient cursor-based pagination.",
+          ]
+        },
+        {
+          title: "DevOps & Leadership",
+          items: [
+            "Managed <strong>containerized deployments</strong> with <strong>Docker Swarm</strong>, including Dockerfile authoring, multi-service orchestration, and <strong>CI/CD pipelines</strong> for automated build and deploy workflows.",
+            "Led cross-functional meetings with customer support to develop the <strong>Sticky Agent</strong> feature based on user feedback.",
+            "Mentored junior developers and contributed to sprint planning and project management.",
+          ]
+        }
+      ]
+    },
+    projects: [],
+    technologies: ["TypeScript", "React", "Next.js", "Node.js", "NestJS", "Cassandra", "PostgreSQL", "RabbitMQ", "WebSockets", "Docker", "Material UI", "Redux", "Nginx", "AWS", "SIP.js", "Git"],
+    logo: "/logos/tech-innovations.svg"
+  }
+];
 
+const Experience = () => {
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const { performanceMode } = usePerformance();
 

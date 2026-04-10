@@ -12,40 +12,41 @@ interface SocialLink {
   color: string
 }
 
+const socialLinks: SocialLink[] = [
+  {
+    name: "LinkedIn",
+    icon: <Linkedin size={22} />,
+    url: "https://linkedin.com/in/sabirpm",
+    color: "#0077B5"
+  },
+  {
+    name: "GitHub",
+    icon: <Github size={22} />,
+    url: "https://github.com/anonlegionoke",
+    color: "#020202"
+  },
+  {
+    name: "Email",
+    icon: <Mail size={22} />,
+    url: "mailto:smrazind@gmail.com",
+    color: "#D44638"
+  },
+  {
+    name: "LeetCode",
+    icon: <SiLeetcode size={22} />,
+    url: "https://leetcode.com/anonlegio",
+    color: "#FFA116"
+  },
+  {
+    name: "Discord",
+    icon: <FaDiscord size={22} />,
+    url: "https://discord.gg/JWcAFxZ5",
+    color: "#5865f2"
+  }
+];
+
 const Connect = () => {
   const { performanceMode } = usePerformance();
-  const socialLinks: SocialLink[] = [
-    {
-      name: "LinkedIn",
-      icon: <Linkedin size={22} />,
-      url: "https://linkedin.com/in/sabirpm",
-      color: "#0077B5"
-    },
-    {
-      name: "GitHub",
-      icon: <Github size={22} />,
-      url: "https://github.com/anonlegionoke",
-      color: "#020202"
-    },
-    {
-      name: "Email",
-      icon: <Mail size={22} />,
-      url: "mailto:smrazind@gmail.com",
-      color: "#D44638"
-    },
-    {
-      name: "LeetCode",
-      icon: <SiLeetcode size={22} />,
-      url: "https://leetcode.com/anonlegio",
-      color: "#FFA116"
-    },
-    {
-      name: "Discord",
-      icon: <FaDiscord size={22} />,
-      url: "https://discord.gg/JWcAFxZ5",
-      color: "#5865f2"
-    }
-  ]
 
   const fullVersion = performanceMode === 'full';
 

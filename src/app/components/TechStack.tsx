@@ -11,36 +11,37 @@ interface TechIcon {
   color: string;
 }
 
+const techIcons: TechIcon[] = [
+  { name: 'TypeScript', icon: '/icons/typescript.svg', color: '#3178C6' },
+  { name: 'JavaScript', icon: '/icons/javascript.svg', color: '#F7DF1E' },
+  { name: 'Python', icon: '/icons/python.svg', color: '#fac808' },
+  { name: 'Rust', icon: '/icons/rust.svg', color: '#CE422B' },
+  { name: 'C++', icon: '/icons/c++.svg', color: '#007396' },
+  { name: 'React', icon: '/icons/react.svg', color: '#61DAFB' },
+  { name: 'Next.js', icon: '/icons/nextjs.svg', color: '#000000' },
+  { name: 'Node.js', icon: '/icons/nodejs.svg', color: '#339933' },
+  { name: 'NestJS', icon: '/icons/nestjs.svg', color: '#ea2845' },
+  { name: 'Cassandra', icon: '/icons/cassandra.svg', color: '#2496ED' },
+  { name: 'PostgreSQL', icon: '/icons/postgresql.svg', color: '#4169E1' },
+  { name: 'MongoDB', icon: '/icons/mongodb.svg', color: '#47A248' },
+  { name: 'RabbitMQ', icon: '/icons/rabbitmq.svg', color: '#FF6600' },
+  { name: 'Docker', icon: '/icons/docker.svg', color: '#2496ED' },
+  { name: 'Nginx', icon: '/icons/nginx.svg', color: '#019639' },
+  { name: 'AWS', icon: '/icons/aws.svg', color: '#232F3E' },
+  { name: 'Tailwind', icon: '/icons/tailwindcss.svg', color: '#06B6D4' },
+  { name: 'Material UI', icon: '/icons/material-ui.svg', color: '#2496ED' },
+  { name: 'Redux', icon: '/icons/redux.svg', color: '#764abc' },
+  { name: 'Prisma', icon: '/icons/prisma.svg', color: '#0c344b' },
+  { name: 'Git', icon: '/icons/git.svg', color: '#F05032' },
+  { name: 'Postman', icon: '/icons/postman.svg', color: '#ff6c37' },
+  { name: 'Linux', icon: '/icons/linux.svg', color: '#FFFFFF' },
+  { name: 'Figma', icon: '/icons/figma.svg', color: '#1abcfe' },
+  { name: 'HTML5', icon: '/icons/html5.svg', color: '#E34F26' },
+  { name: 'CSS3', icon: '/icons/css3.svg', color: '#1572B6' },
+];
+
 export default function TechStack() {
   const { performanceMode } = usePerformance();
-  const techIcons: TechIcon[] = [
-    { name: 'TypeScript', icon: '/icons/typescript.svg', color: '#3178C6' },
-    { name: 'JavaScript', icon: '/icons/javascript.svg', color: '#F7DF1E' },
-    { name: 'Python', icon: '/icons/python.svg', color: '#fac808' },
-    { name: 'Rust', icon: '/icons/rust.svg', color: '#CE422B' },
-    { name: 'C++', icon: '/icons/c++.svg', color: '#007396' },
-    { name: 'React', icon: '/icons/react.svg', color: '#61DAFB' },
-    { name: 'Next.js', icon: '/icons/nextjs.svg', color: '#000000' },
-    { name: 'Node.js', icon: '/icons/nodejs.svg', color: '#339933' },
-    { name: 'NestJS', icon: '/icons/nestjs.svg', color: '#ea2845' },
-    { name: 'Cassandra', icon: '/icons/cassandra.svg', color: '#2496ED' },
-    { name: 'PostgreSQL', icon: '/icons/postgresql.svg', color: '#4169E1' },
-    { name: 'MongoDB', icon: '/icons/mongodb.svg', color: '#47A248' },
-    { name: 'RabbitMQ', icon: '/icons/rabbitmq.svg', color: '#FF6600' },
-    { name: 'Docker', icon: '/icons/docker.svg', color: '#2496ED' },
-    { name: 'Nginx', icon: '/icons/nginx.svg', color: '#019639' },
-    { name: 'AWS', icon: '/icons/aws.svg', color: '#232F3E' },
-    { name: 'Tailwind', icon: '/icons/tailwindcss.svg', color: '#06B6D4' },
-    { name: 'Material UI', icon: '/icons/material-ui.svg', color: '#2496ED' },
-    { name: 'Redux', icon: '/icons/redux.svg', color: '#764abc' },
-    { name: 'Prisma', icon: '/icons/prisma.svg', color: '#0c344b' },
-    { name: 'Git', icon: '/icons/git.svg', color: '#F05032' },
-    { name: 'Postman', icon: '/icons/postman.svg', color: '#ff6c37' },
-    { name: 'Linux', icon: '/icons/linux.svg', color: '#FFFFFF' },
-    { name: 'Figma', icon: '/icons/figma.svg', color: '#1abcfe' },
-    { name: 'HTML5', icon: '/icons/html5.svg', color: '#E34F26' },
-    { name: 'CSS3', icon: '/icons/css3.svg', color: '#1572B6' },
-  ];
 
   const displayIcons = performanceMode === 'light'
     ? techIcons.slice(0, 15)
