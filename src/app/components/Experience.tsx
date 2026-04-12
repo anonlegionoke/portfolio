@@ -44,7 +44,7 @@ const experiences: ExperienceItem[] = [
           items: [
             "Revamped the legacy application with a modern React and Material UI stack, building interactive <strong>Recharts</strong> dashboards with dynamic timezone ",
             "Built a comprehensive <strong>contact activity timeline</strong> with supporting backend: database schema, REST APIs, and service logic.",
-            "Implemented Campaigns Management UI for campaign creation, tracking, and analysis.",              
+            "Implemented Campaigns Management UI for campaign creation, tracking, and analysis.",
           ]
         },
         {
@@ -71,7 +71,7 @@ const experiences: ExperienceItem[] = [
           title: "Backend & Distributed Systems",
           items: [
             "Architected and developed <strong>multi-instance microservices</strong> for SIP call routing, implementing <strong>round-robin</strong> and <strong>sticky-agent assignment</strong> with race condition handling via <strong>Cassandra lightweight transactions</strong>.",
-            "Built a <strong>distributed job scheduler with sharding</strong> across multiple service instances, ensuring reliable scheduled campaign execution using <strong>Cassandra</strong> as the coordination backbone.",
+            "Built a <strong>distributed job scheduler</strong> with shard-based execution across service instances, implementing <strong>epoch fencing</strong> and <strong>crash recovery</strong> to prevent <strong>split-brain</strong> while mitigating <strong>Cassandra tombstone bloat</strong> under heavy workloads.",
             "Designed an <strong>event-driven notification system</strong> using <strong>RabbitMQ</strong>, <strong>WebSockets</strong>, and <strong>webhooks</strong>, supporting real-time SIP calls, live transcription, and multi-channel delivery.",
             "Engineered a <strong>multi-instance campaign service</strong> with contact pool management, retry logic, and configurable scheduling, orchestrating outreach across <strong>1M+ contacts</strong>.",
             "Achieved <strong>100% accuracy</strong> and consistency in call logging across normalized <strong>Cassandra</strong> tables, handling over <strong>100,000 entries daily</strong>.",
