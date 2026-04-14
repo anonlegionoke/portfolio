@@ -154,7 +154,7 @@ const handleShowLess = (setIsExpanded: (v: boolean) => void) => {
 };
 
 /* ──────────────────────────────────────────────
-   Mobile: Compact horizontal cards
+   Mobile: Compact horizontal cards (no Framer)
    ────────────────────────────────────────────── */
 
 const MobileCards = () => {
@@ -168,14 +168,10 @@ const MobileCards = () => {
       className="relative overflow-hidden rounded-b-xl"
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {projects.map((project, index) => (
-          <motion.div
+        {projects.map((project) => (
+          <div
             key={project.id}
             className="flex gap-4 p-4 bg-black/30 rounded-2xl border border-white/10 hover:border-white/25 transition-colors duration-200 group"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.4, delay: (index % 2) * 0.08 }}
           >
             {/* Screenshot */}
             <div className="relative w-[120px] sm:w-[160px] min-w-[120px] sm:min-w-[160px] aspect-[4/3] overflow-hidden rounded-xl bg-gray-800/50 border border-white/5">
@@ -185,7 +181,7 @@ const MobileCards = () => {
                   alt={project.name}
                   fill
                   sizes="160px"
-                  className="object-cover transition-transform duration-400 group-hover:scale-105"
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               ) : (
                 <div className="flex items-center justify-center w-full h-full text-white/30 text-xs">Screenshot</div>
@@ -211,7 +207,7 @@ const MobileCards = () => {
                 )}
               </div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
 
@@ -258,64 +254,57 @@ const DesktopMasonry = () => {
       <div className="flex w-full items-start gap-6">
         {columnWrappers.map((col, colIdx) => (
           <div key={colIdx} className="flex flex-col gap-6 flex-1 min-w-0">
-            {col.map((project) => {
-              const gi = projects.indexOf(project);
-              return (
-                <motion.div
-                  key={project.id}
-                  className="relative flex flex-col p-5 bg-black/30 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-white/30 transition-colors duration-200 group"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.5, delay: (gi % columns) * 0.1 }}
-                >
-                  {/* Screenshot */}
-                  <div className="relative w-full aspect-video mb-5 overflow-hidden rounded-xl bg-gray-800/50 border border-white/5">
-                    {project.screenshot ? (
-                      <Image
-                        src={project.screenshot}
-                        alt={project.name}
-                        fill
-                        sizes="(max-width: 1024px) 50vw, 33vw"
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    ) : (
-                      <div className="flex items-center justify-center w-full h-full text-white/30">Screenshot</div>
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                  </div>
+            {col.map((project) => (
+              <div
+                key={project.id}
+                className="relative flex flex-col p-5 bg-black/30 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-white/30 transition-colors duration-200 group"
+              >
+                {/* Screenshot */}
+                <div className="relative w-full aspect-video mb-5 overflow-hidden rounded-xl bg-gray-800/50 border border-white/5">
+                  {project.screenshot ? (
+                    <Image
+                      src={project.screenshot}
+                      alt={project.name}
+                      fill
+                      sizes="(max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="flex items-center justify-center w-full h-full text-white/30">Screenshot</div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                </div>
 
-                  {/* Details */}
-                  <div className="flex flex-col flex-grow">
-                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#e2e8f0] transition-colors">{project.name}</h3>
-                    <p className="text-white/70 text-sm leading-relaxed mb-6 flex-grow">{project.description}</p>
+                {/* Details */}
+                <div className="flex flex-col flex-grow">
+                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#e2e8f0] transition-colors">{project.name}</h3>
+                  <p className="text-white/70 text-sm leading-relaxed mb-6 flex-grow">{project.description}</p>
 
-                    <div className="flex flex-col gap-4 mt-auto">
-                      <div className="flex flex-wrap gap-2">
-                        {project.techStack.map((tech, i) => (
-                          <span key={i} className="px-2 py-1 bg-white/5 border border-white/10 rounded-md text-xs text-white/80">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
+                  <div className="flex flex-col gap-4 mt-auto">
+                    <div className="flex flex-wrap gap-2">
+                      {project.techStack.map((tech, i) => (
+                        <span key={i} className="px-2 py-1 bg-white/5 border border-white/10 rounded-md text-xs text-white/80">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
 
-                      <div className="flex gap-4 pt-4 border-t border-white/10">
-                        {project.liveLink && (
-                          <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="hover:text-white text-white/70 flex items-center gap-1 text-sm transition-colors">
-                            <SquareArrowOutUpRight size={14} /> Live
-                          </a>
-                        )}
-                        {project.githubLink && (
-                          <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="hover:text-white text-white/70 flex items-center gap-1 text-sm transition-colors">
-                            <Github size={14} /> Source
-                          </a>
-                        )}
-                      </div>
+                    <div className="flex gap-4 pt-4 border-t border-white/10">
+                      {project.liveLink && (
+                        <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="hover:text-white text-white/70 flex items-center gap-1 text-sm transition-colors">
+                          <SquareArrowOutUpRight size={14} /> Live
+                        </a>
+                      )}
+                      {project.githubLink && (
+                        <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="hover:text-white text-white/70 flex items-center gap-1 text-sm transition-colors">
+                          <Github size={14} /> Source
+                        </a>
+                      )}
                     </div>
                   </div>
-                </motion.div>
-              );
-            })}
+                </div>
+              </div>
+            ))}
           </div>
         ))}
       </div>
@@ -331,26 +320,14 @@ const DesktopMasonry = () => {
 };
 
 /* ──────────────────────────────────────────────
-   Main wrapper — CSS toggle between layouts
+   Main wrapper
    ────────────────────────────────────────────── */
 
 const Project = () => (
-  <motion.div
-    className="w-full py-8 sm:py-12 mt-12 sm:mt-16 bg-black/20 rounded-[2rem] border border-white/10 shadow-2xl px-4 sm:px-8"
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-100px" }}
-    transition={{ duration: 0.8 }}
-  >
-    <motion.h2
-      className="text-2xl sm:text-3xl font-bold text-white text-center mb-8 sm:mb-10 drop-shadow-md"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: 0.2 }}
-    >
+  <div className="w-full py-8 sm:py-12 mt-12 sm:mt-16 bg-black/20 rounded-[2rem] border border-white/10 shadow-2xl px-4 sm:px-8">
+    <h2 className="text-2xl sm:text-3xl font-bold text-white text-center mb-8 sm:mb-10 drop-shadow-md">
       Projects
-    </motion.h2>
+    </h2>
 
     {/* Mobile + Tablet: horizontal cards */}
     <div className="block lg:hidden">
@@ -361,7 +338,7 @@ const Project = () => (
     <div className="hidden lg:block">
       <DesktopMasonry />
     </div>
-  </motion.div>
+  </div>
 );
 
 export default Project;
