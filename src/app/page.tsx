@@ -4,14 +4,12 @@ import { House, PanelsTopLeft, ChartNoAxesGantt, Handshake, Tally1, ArrowUp } fr
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';
-import PerformanceToggle from './components/PerformanceToggle';
 
 const Project = dynamic(() => import('./components/Project'));
 const Connect = dynamic(() => import('./components/Connect'));
 const Experience = dynamic(() => import('./components/Experience'));
 const TechStack = dynamic(() => import('./components/TechStack'));
 
-import { usePerformance } from './context/PerformanceContext';
 import TypewriterEffect from './components/TypewriterEffect';
 
 function LoadingOverlay() {
@@ -59,7 +57,6 @@ function LoadingOverlay() {
 
 export default function Home() {
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const { performanceMode } = usePerformance();
 
   const scrollToSection = (elementId: string) => {
     const element = document.getElementById(elementId);
@@ -101,12 +98,12 @@ export default function Home() {
         className="fixed md:sticky md:top-0 bottom-0 left-0 right-0 z-50 flex justify-center items-center py-3 md:py-0 md:h-16"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: performanceMode === 'full' ? 0.5 : 0 }}
+        transition={{ duration: 0.5 }}
       >
         <motion.div
           className="border border-white/30 flex items-center justify-between gap-2 md:gap-4 mx-auto
           rounded-full py-0.5 px-1 bg-black/70 md:bg-black/40 shadow-lg"
-          whileHover={performanceMode === 'full' ? { boxShadow: "0 0 15px rgba(255, 255, 255, 0.2)" } : {}}
+          whileHover={{ boxShadow: "0 0 15px rgba(255, 255, 255, 0.2)" }}
         >
           <button
             className='flex items-center py-2 px-3 md:px-4 rounded-full cursor-pointer hover:bg-white/10 transition-colors bg-white/20'
@@ -136,16 +133,14 @@ export default function Home() {
             <Handshake className='w-5 h-5 text-white' />
             <span className='ml-2 text-sm hidden md:inline text-white'>Connect</span>
           </button>
-          <Tally1 className="hidden md:block text-white" />
-          <PerformanceToggle />
         </motion.div>
       </motion.div>
       <div id="home-section" className="flex justify-between items-center px-2 sm:px-4 md:px-10 mt-15 gap-5">
         <motion.div
-          className={`${performanceMode === 'full' ? ' bg-white/10' : 'bg-black/20'} p-4 sm:p-6 md:p-8 rounded-2xl shadow-xl border border-white/20 w-full`}
+          className="bg-white/10 p-4 sm:p-6 md:p-8 rounded-2xl shadow-xl border border-white/20 w-full"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: performanceMode === 'full' ? 0.8 : 0 }}
+          transition={{ duration: 0.8 }}
         >
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white drop-shadow-md">
             Hi, I&apos;m <TypewriterEffect
@@ -161,8 +156,8 @@ export default function Home() {
           <div className="flex gap-4 mt-6 md:mt-8">
             <motion.button
               className="bg-transparent text-white border border-white/50 cursor-pointer hover:bg-white/10 transition-all py-2 px-4 md:px-6 rounded-full font-medium shadow-lg"
-              whileHover={performanceMode === 'full' ? { scale: 1.05 } : {}}
-              whileTap={performanceMode === 'full' ? { scale: 0.95 } : {}}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => {
                 const link = document.createElement('a');
                 link.href = '/data/SabirResume.pdf';
@@ -176,8 +171,8 @@ export default function Home() {
             </motion.button>
             <motion.button
               className="bg-white text-black cursor-pointer hover:bg-white/70 transition-all py-2 px-4 md:px-6 rounded-full font-medium shadow-lg"
-              whileHover={performanceMode === 'full' ? { scale: 1.05 } : {}}
-              whileTap={performanceMode === 'full' ? { scale: 0.95 } : {}}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => scrollToSection('connect-section')}
             >
               Get in touch
@@ -207,8 +202,8 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.5 }}
-            whileHover={performanceMode === 'full' ? { scale: 1.1, backgroundColor: 'rgba(255, 255, 255, 0.2)' } : {}}
-            whileTap={performanceMode === 'full' ? { scale: 0.9 } : {}}
+            whileHover={{ scale: 1.1, backgroundColor: 'rgba(255, 255, 255, 0.2)' }}
+            whileTap={{ scale: 0.9 }}
           >
             <ArrowUp className="w-5 h-5 text-white" />
           </motion.button>
@@ -220,7 +215,7 @@ export default function Home() {
         className="w-full pb-3 text-center text-white/70"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.5, duration: performanceMode === 'full' ? 0.8 : 0.3 }}
+        transition={{ delay: 0.5, duration: 0.8 }}
       >
         <p className="text-sm">
           <span className="mr-1">{"\u00A9"}</span>{new Date().getFullYear()} • Thank you for visiting ❤️

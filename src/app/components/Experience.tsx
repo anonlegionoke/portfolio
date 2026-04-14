@@ -1,7 +1,7 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Circle } from "lucide-react";
-import { usePerformance } from "../context/PerformanceContext";
 
 interface ExperienceItem {
   id: number;
@@ -26,7 +26,6 @@ interface ExperienceItem {
   };
   projects?: string[];
   technologies: string[];
-  logo?: string;
 }
 
 const experiences: ExperienceItem[] = [
@@ -100,98 +99,52 @@ const experiences: ExperienceItem[] = [
     },
     projects: [],
     technologies: ["TypeScript", "React", "Next.js", "Node.js", "NestJS", "Cassandra", "PostgreSQL", "RabbitMQ", "WebSockets", "Docker", "Material UI", "Redux", "Nginx", "AWS", "SIP.js", "Git"],
-    logo: "/logos/tech-innovations.svg"
   }
 ];
 
+const RoleTimeline = ({ role }: { role: { title: string; period: string; sections: { title: string; items: string[] }[] } }) => (
+  <li className="mb-10 ms-6">
+    <span className="absolute flex items-center justify-center w-6 h-6 rounded-full -start-3 ring-8 ring-gray-900 bg-blue-900 mt-1">
+      <svg className="w-2.5 h-2.5 text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+      </svg>
+    </span>
+    <div className="ml-1">
+      <h3 className="flex items-center mb-1 text-lg font-semibold text-white">{role.title}</h3>
+      <time className="block mb-2 text-sm font-normal leading-none text-gray-400">{role.period}</time>
+      <div className="mb-4 text-base font-normal text-gray-500 mt-5">
+        {role.sections.map((section, i) => (
+          <div key={i} className="mb-8">
+            <h6 className="text-white font-semibold my-2 ml-2">{section.title}:</h6>
+            <ul className="list-disc list-outside text-white/80 text-sm md:text-base space-y-2 ml-6">
+              {section.items.map((item, j) => (
+                <li key={j} dangerouslySetInnerHTML={{ __html: item }} />
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </li>
+);
+
 const Experience = () => {
   const [expandedId, setExpandedId] = useState<number | null>(null);
-  const { performanceMode } = usePerformance();
-
-  const toggleExpand = (id: number) => {
-    setExpandedId(expandedId === id ? null : id);
-  };
-
-  const fullVersion = performanceMode === 'full';
-
-  const containerVariants = {
-    visible: {
-      opacity: 1,
-    },
-    ...(fullVersion && {
-      hidden: { opacity: 0 },
-      visible: {
-        opacity: 1,
-        transition: {
-          staggerChildren: 0.3
-        }
-      }
-    })
-  };
-
-  const itemVariants = {
-    visible: {
-      opacity: 1,
-      y: 0,
-    },
-    ...(fullVersion && {
-      hidden: { opacity: 0, y: 20 },
-      visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-          type: "spring",
-          stiffness: 100,
-          damping: 12,
-          duration: 0.2
-        }
-      }
-    })
-  };
 
   return (
-    <motion.div
-      className={`w-full overflow-hidden py-6 sm:py-8 mt-12  ${performanceMode === 'light' ? 'bg-black/20' : 'bg-white/5'} rounded-2xl shadow-xl border border-white/10`}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: performanceMode === 'full' ? 0.8 : 0, delay: performanceMode === 'full' ? 0.2 : 0 }}
-    >
-      <motion.h2
-        className="text-2xl sm:text-3xl font-bold text-white text-center mb-8 sm:mb-12 drop-shadow-md"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: performanceMode === 'full' ? 0.5 : 0, delay: performanceMode === 'full' ? 0.3 : 0 }}
-      >
+    <div className="w-full overflow-hidden py-6 sm:py-8 mt-12 bg-white/5 rounded-2xl shadow-xl border border-white/10">
+      <h2 className="text-2xl sm:text-3xl font-bold text-white text-center mb-8 sm:mb-12 drop-shadow-md">
         Experience
-      </motion.h2>
+      </h2>
 
-      <motion.div
-        className={`relative px-2 sm:px-4 ${experiences.length > 1 ? "md:px-16" : ""}`}
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {/* Timeline items */}
-        {experiences.map((exp, index) => (
-          <motion.div
-            key={exp.id}
-            className="relative last:mb-0"
-            variants={itemVariants}
-          >
-            {/* Timeline */}
+      <div className="relative px-2 sm:px-4">
+        {experiences.map((exp) => (
+          <div key={exp.id} className="relative last:mb-0">
             <div className="flex items-start justify-center">
-              <div>
-                {experiences.length > 1 && (<Circle className="w-6 h-6 flex items-center justify-center z-10" />)}
-
-                {index < experiences.length - 1 && (<div className={`w-0.5 ${expandedId === exp.id ? "h-250 md:h-137" : "h-50"} flex items-center bg-white/20 justify-center z-10 ml-2.5 transition-all duration-300`} />)}
-              </div>
-
-              {/* Content card */}
-              <motion.div
-                className={`cursor-pointer ${performanceMode === 'light' ? 'bg-black/20' : 'bg-black/20'} w-full rounded-xl border border-white/10 p-6 ml-4 ${experiences.length > 1 ? "md:ml-16" : ""} transition-all duration-300 ${expandedId === exp.id ? "shadow-lg shadow-white/5" : ""
-                  }`}
-                whileHover={performanceMode === 'full' ? { scale: 1.01 } : {}}
-                onClick={() => toggleExpand(exp.id)}
+              {/* Content card — CSS hover, Framer only for height animation */}
+              <div
+                className="cursor-pointer bg-black/20 w-full rounded-xl border border-white/10 p-6 transition-all duration-200 hover:scale-[1.005] hover:shadow-lg hover:shadow-white/5"
+                onClick={() => setExpandedId(expandedId === exp.id ? null : exp.id)}
               >
                 <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
                   <div>
@@ -201,90 +154,37 @@ const Experience = () => {
                   <div className="text-white/60 mt-2 md:mt-0 text-sm md:text-base">{exp.duration}</div>
                 </div>
 
+                {/* Framer Motion ONLY for height:"auto" interpolation — CSS can't do this */}
                 <motion.div
-                  initial={{ height: 0, opacity: 0 }}
+                  initial={false}
                   animate={{
-                    height: expandedId === exp.id ? "auto" : '240px',
+                    height: expandedId === exp.id ? "auto" : 240,
                     opacity: expandedId === exp.id ? 1 : 0.65
                   }}
-                  transition={{ duration: performanceMode === 'full' ? 0.3 : 0 }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                   className="overflow-hidden"
                 >
                   <div className="pt-8 border-t border-white/10 m-5">
                     <ol className="relative border-s border-gray-700">
-                      {exp.role2 && (
-                        <li className="mb-10 ms-6">
-                          <span className="absolute flex items-center justify-center w-6 h-6  rounded-full -start-3 ring-8  ring-gray-900 bg-blue-900 mt-1">
-                            <svg className="w-2.5 h-2.5 text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                              <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                            </svg>
-                          </span>
-                          <div className="ml-1">
-                            <h3 className="flex items-center mb-1 text-lg font-semibold text-white">
-                              {exp.role2.title}
-                            </h3>
-                            <time className="block mb-2 text-sm font-normal leading-none text-gray-400">
-                              {exp.role2.period}
-                            </time>
-                            <div className="mb-4 text-base font-normal text-gray-500 mt-5">
-                              {exp.role2.sections.map((section, sectionIndex) => (
-                                <div key={sectionIndex} className="mb-8">
-                                  <h6 className="text-white font-semibold my-2 ml-2">{section.title}:</h6>
-                                  <ul className="list-disc list-outside text-white/80 text-sm md:text-base space-y-2 ml-6">
-                                    {section.items.map((item, itemIndex) => (
-                                      <li key={itemIndex} dangerouslySetInnerHTML={{ __html: item }} />
-                                    ))}
-                                  </ul>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        </li>
-                      )}
-                      {exp.role1 && (
-                        <li className="mb-10 ms-6">
-                          <span className="absolute flex items-center justify-center w-6 h-6 rounded-full -start-3 ring-8 ring-gray-900 bg-blue-900 mt-1">
-                            <svg className="w-2.5 h-2.5 text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                              <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                            </svg>
-                          </span>
-                          <div className="ml-1">
-                            <h3 className="flex items-center mb-1 text-lg font-semibold text-white">
-                              {exp.role1.title}
-                            </h3>
-                            <time className="block mb-2 text-sm font-normal leading-none text-gray-400">
-                              {exp.role1.period}
-                            </time>
-                            <div className="mb-4 text-base font-normal text-gray-500 mt-5">
-                              {exp.role1.sections.map((section, sectionIndex) => (
-                                <div key={sectionIndex} className="mb-8">
-                                  <h6 className="text-white font-semibold my-2 ml-2">{section.title}:</h6>
-                                  <ul className="list-disc list-outside text-white/80 text-sm md:text-base space-y-2 ml-6">
-                                    {section.items.map((item, itemIndex) => (
-                                      <li key={itemIndex} dangerouslySetInnerHTML={{ __html: item }} />
-                                    ))}
-                                  </ul>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        </li>
-                      )}
+                      {exp.role2 && <RoleTimeline role={exp.role2} />}
+                      {exp.role1 && <RoleTimeline role={exp.role1} />}
                     </ol>
-                    <h6 className={`text-white font-medium mb-2 ml-2 ${exp.projects && exp.projects.length > 0 ? "" : "hidden"}`}>Projects:</h6>
-                    <ul className={`list-disc list-outside text-white/80 space-y-2 mb-6 ml-6 ${exp.projects && exp.projects.length > 0 ? "" : "hidden"}`}>
-                      {exp.projects?.map((project, i) => (
-                        <li key={i}>{project}</li>
-                      ))}
-                    </ul>
+
+                    {exp.projects && exp.projects.length > 0 && (
+                      <>
+                        <h6 className="text-white font-medium mb-2 ml-2">Projects:</h6>
+                        <ul className="list-disc list-outside text-white/80 space-y-2 mb-6 ml-6">
+                          {exp.projects.map((project, i) => (
+                            <li key={i}>{project}</li>
+                          ))}
+                        </ul>
+                      </>
+                    )}
 
                     <h6 className="text-white font-medium mb-2">Technologies:</h6>
                     <div className="flex flex-wrap gap-2">
                       {exp.technologies.map((tech, i) => (
-                        <span
-                          key={i}
-                          className="px-3 py-1 bg-white/10 rounded-full text-xs text-white/90"
-                        >
+                        <span key={i} className="px-3 py-1 bg-white/10 rounded-full text-xs text-white/90">
                           {tech}
                         </span>
                       ))}
@@ -294,21 +194,26 @@ const Experience = () => {
 
                 <div className="flex justify-center mt-4">
                   <button
-                    className="text-white/60 hover:text-white text-sm transition-colors duration-300"
+                    className="text-white/60 hover:text-white text-sm transition-colors duration-200"
                     onClick={(e) => {
                       e.stopPropagation();
-                      toggleExpand(exp.id);
+                      if (expandedId === exp.id) {
+                        document.getElementById('experience-section')?.scrollIntoView({ behavior: 'smooth' });
+                        setTimeout(() => setExpandedId(null), 500);
+                      } else {
+                        setExpandedId(exp.id);
+                      }
                     }}
                   >
                     {expandedId === exp.id ? "Show Less" : "Show More"}
                   </button>
                 </div>
-              </motion.div>
+              </div>
             </div>
-          </motion.div>
+          </div>
         ))}
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 };
 

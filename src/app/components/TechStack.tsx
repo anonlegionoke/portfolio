@@ -1,8 +1,5 @@
 "use client";
 
-import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { usePerformance } from '../context/PerformanceContext';
 import Image from 'next/image';
 
 interface TechIcon {
@@ -40,171 +37,86 @@ const techIcons: TechIcon[] = [
   { name: 'CSS3', icon: '/icons/css3.svg', color: '#1572B6' },
 ];
 
+const reversedIcons = [...techIcons].reverse();
+
+const TechItem = ({ tech, priority }: { tech: TechIcon; priority: boolean }) => (
+  <div
+    className="tech-item flex flex-col items-center justify-center w-20 shrink-0"
+    style={{ '--glow-color': `${tech.color}80` } as React.CSSProperties}
+  >
+    <div
+      className="tech-icon-box w-14 h-14 flex items-center justify-center rounded-xl p-2 mb-2"
+      style={{ backgroundColor: `${tech.color}20` }}
+    >
+      <Image
+        src={tech.icon}
+        alt={tech.name}
+        width={30}
+        height={30}
+        className="object-contain"
+        priority={priority}
+      />
+    </div>
+    <span className="text-white/70 text-center text-nowrap" style={{ fontSize: '11px' }}>{tech.name}</span>
+  </div>
+);
+
 export default function TechStack() {
-  const { performanceMode } = usePerformance();
-
-  const displayIcons = performanceMode === 'light'
-    ? techIcons.slice(0, 15)
-    : techIcons;
-
-  const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
-
-  const animationDuration = 15;
-  const hoverEffects = performanceMode === 'full';
-
-  const animations = {
-    ...(hoverEffects && {
-      initial: { opacity: 0 },
-      animate: { opacity: 1 },
-      transition: { duration: 0.5, delay: 0.3 },
-      divAnimate1: { x: ["0%", "-50%"] },
-      divTransition1: {
-        x: {
-          repeat: Infinity,
-          repeatType: "mirror",
-          duration: animationDuration,
-          ease: "linear"
-        }
-      },
-      divAnimate2: { x: ["-50%", "0%"] },
-      divTransition2: {
-        x: {
-          repeat: Infinity,
-          repeatType: "mirror",
-          duration: animationDuration,
-          ease: "linear"
-        }
-      }
-    })
-  }
-
   return (
-    <div className={`w-full overflow-hidden ${performanceMode === 'full' ? 'py-10' : 'pt-10'} ${performanceMode === 'full' ? 'bg-white/5' : 'bg-black/20'} rounded-2xl shadow-xl border border-white/10`}>
-      <motion.h2
-        className="text-2xl sm:text-3xl font-bold text-white text-center mb-8 drop-shadow-md"
-        initial={hoverEffects ? animations.initial : { opacity: 1 }}
-        animate={animations.animate}
-        transition={animations.transition}
-      >
+    <div className="w-full overflow-hidden py-10 bg-white/5 rounded-2xl shadow-xl border border-white/10">
+      <h2 className="text-2xl sm:text-3xl font-bold text-white text-center mb-12 drop-shadow-md animate-fade-in">
         Technologies I Work With
-      </motion.h2>
+      </h2>
 
-      {hoverEffects ? (
-        <div className="relative w-1/2">
-          {/* First row - moving right */}
-          <motion.div
-            className="flex space-x-12 mb-8"
-            animate={animations.divAnimate1}
-            transition={animations.divTransition1}
-          >
-            {displayIcons.map((tech, index) => (
-              <motion.div
-                key={`${tech.name}-${index}`}
-                className="flex flex-col items-center justify-center w-20"
-                whileHover={hoverEffects ? { y: -5, scale: 1.1 } : {}}
-                onHoverStart={() => hoverEffects && setHoveredIcon(tech.name + index)}
-                onHoverEnd={() => hoverEffects && setHoveredIcon(null)}
-              >
-                <div
-                  className="w-14 h-14 flex items-center justify-center rounded-xl p-2 mb-2"
-                  style={{
-                    backgroundColor: `${tech.color}20`,
-                    boxShadow: hoverEffects && hoveredIcon === tech.name + index ? `0 0 15px ${tech.color}80` : 'none',
-                    transition: 'box-shadow 0.3s ease'
-                  }}
-                >
-                  <Image
-                    src={tech.icon}
-                    alt={tech.name}
-                    width={30}
-                    height={30}
-                    className="object-contain"
-                    priority={index < 6}
-                  />
-                </div>
-                <span className="text-white/70 text-center text-nowrap" style={{ fontSize: '11px' }}>{tech.name}</span>
-              </motion.div>
-            ))}
-          </motion.div>
+      <style>{`
+        @keyframes scroll-right {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        @keyframes scroll-left {
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
+        }
+        .scroll-track-right {
+          animation: scroll-right 50s linear infinite;
+        }
+        .scroll-track-left {
+          animation: scroll-left 50s linear infinite;
+        }
+        .scroll-track-right:hover,
+        .scroll-track-left:hover {
+          animation-play-state: paused;
+        }
+        .tech-item {
+          transition: transform 0.2s ease;
+        }
+        .tech-item:hover {
+          transform: translateY(-5px) scale(1.1);
+        }
+        .tech-item:hover .tech-icon-box {
+          box-shadow: 0 0 15px var(--glow-color);
+        }
+      `}</style>
 
-          {/* Second row - moving left */}
-          <motion.div
-            className="flex space-x-12"
-            animate={animations.divAnimate2}
-            transition={animations.divTransition2}
-          >
-            {displayIcons.slice().reverse().map((tech, index) => (
-              <motion.div
-                key={`reverse-${tech.name}-${index}`}
-                className="flex flex-col items-center justify-center w-20"
-                whileHover={hoverEffects ? { y: -5, scale: 1.1 } : {}}
-                onHoverStart={() => hoverEffects && setHoveredIcon(`reverse-${tech.name}-${index}`)}
-                onHoverEnd={() => hoverEffects && setHoveredIcon(null)}
-              >
-                <div
-                  className="w-14 h-14 flex items-center justify-center rounded-xl p-2 mb-2"
-                  style={{
-                    backgroundColor: `${tech.color}20`,
-                    boxShadow: hoverEffects && hoveredIcon === `reverse-${tech.name}-${index}` ? `0 0 15px ${tech.color}80` : 'none',
-                    transition: 'box-shadow 0.3s ease'
-                  }}
-                >
-                  <Image
-                    src={tech.icon}
-                    alt={tech.name}
-                    width={30}
-                    height={30}
-                    className="object-contain"
-                    priority={index < 6}
-                  />
-                </div>
-                <span className="text-white/70 text-center text-nowrap" style={{ fontSize: '11px' }}>{tech.name}</span>
-              </motion.div>
-            ))}
-          </motion.div>
+      <div className="relative w-full">
+        {/* Row 1 — scrolls right */}
+        <div className="flex scroll-track-right mb-8" style={{ width: 'max-content' }}>
+          {[...techIcons, ...techIcons].map((tech, i) => (
+            <div key={`r1-${i}`} className="mx-6">
+              <TechItem tech={tech} priority={i < 6} />
+            </div>
+          ))}
         </div>
-      ) : (
-        <div className="relative">
-          <div className="grid grid-cols-4 lg:grid-cols-10 gap-4 lg:gap-8 max-h-84 p-4 rounded-xl"
-          >
-            {techIcons.map((tech, index) => (
-              <div
-                key={`${tech.name}-${index}`}
-                className="flex flex-col items-center justify-center"
-              >
-                <div
-                  className="w-12 h-12 flex items-center justify-center rounded-xl p-2 mb-2"
-                  style={{ backgroundColor: `${tech.color}20` }}
-                >
-                  <Image
-                    src={tech.icon}
-                    alt={tech.name}
-                    width={25}
-                    height={25}
-                    className="object-contain"
-                    priority={index < 6}
-                  />
-                </div>
-                <span className="text-xs text-white/70">{tech.name}</span>
-              </div>
-            ))}
-          </div>
-          {/* Elegant fade-out overlay with text */}
-          <div
-            className="pointer-events-none absolute left-0 right-0 bottom-0 h-20 flex items-end justify-center"
-            style={{
-              background: 'linear-gradient(to top, rgba(30,30,40,0.55) 60%, transparent 100%)',
-              borderBottomLeftRadius: '1rem',
-              borderBottomRightRadius: '1rem',
-              zIndex: 10,
-            }}
-          >
-            <span className="text-gray-400 text-xs font-light mb-4 drop-shadow tracking-wide" style={{ letterSpacing: '0.05em' }}>
-              and more...
-            </span>
-          </div>
+
+        {/* Row 2 — scrolls left */}
+        <div className="flex scroll-track-left" style={{ width: 'max-content' }}>
+          {[...reversedIcons, ...reversedIcons].map((tech, i) => (
+            <div key={`r2-${i}`} className="mx-6">
+              <TechItem tech={tech} priority={false} />
+            </div>
+          ))}
         </div>
-      )}
+      </div>
     </div>
   );
 }
