@@ -37,7 +37,7 @@ const projects: ProjectData[] = [
     name: "Crypto Gate",
     description: "A crypto payment gateway enabling merchants to accept any SPL token with automatic USDC conversion via Jupiter aggregator on Solana, featuring real-time payment detection and a merchant dashboard.",
     screenshot: "/screenshots/crypto-gate.png",
-    liveLink: undefined,
+    liveLink: "https://crypto-pay-gateway-delta.vercel.app/",
     githubLink: "https://github.com/anonlegionoke/crypto-pay-gateway",
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Jupiter", "Solana", "PostgreSQL", "Prisma", "Docker"]
   },
