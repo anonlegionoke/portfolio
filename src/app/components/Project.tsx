@@ -117,11 +117,11 @@ const ShowMoreOverlay = ({ onClick }: { onClick: () => void }) => (
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="absolute bottom-0 left-0 right-0 h-[300px] bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent flex items-end justify-center pb-6 z-10"
+      className="absolute bottom-0 left-0 right-0 h-[150px] bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent flex items-end justify-center pb-6 z-10 pointer-events-none"
     >
       <button
         onClick={onClick}
-        className="px-8 py-3 bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md text-white rounded-full text-sm font-medium transition-all flex items-center gap-2 group cursor-pointer shadow-lg"
+        className="px-8 py-3 bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md text-white rounded-full text-sm font-medium transition-all flex items-center gap-2 group cursor-pointer shadow-lg pointer-events-auto"
       >
         Show More <ChevronDown size={16} className="group-hover:translate-y-0.5 transition-transform" />
       </button>
