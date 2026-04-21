@@ -103,7 +103,7 @@ export default function TechStack() {
         <div className="flex scroll-track-right mb-8" style={{ width: 'max-content' }}>
           {[...techIcons, ...techIcons].map((tech, i) => (
             <div key={`r1-${i}`} className="mx-6">
-              <TechItem tech={tech} priority={i < 6} />
+              <TechItem tech={tech} priority={false} />
             </div>
           ))}
         </div>
