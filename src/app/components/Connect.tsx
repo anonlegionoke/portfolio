@@ -1,4 +1,4 @@
-import { Linkedin, Github, Mail } from "lucide-react"
+import { Linkedin, Github, Mail, Twitter } from "lucide-react"
 import { FaDiscord } from "react-icons/fa";
 import ContactForm from "./ContactForm";
 import { SiLeetcode } from "react-icons/si";
@@ -28,6 +28,12 @@ const socialLinks: SocialLink[] = [
     icon: <Mail size={22} />,
     url: "mailto:smrazind@gmail.com",
     color: "#D44638"
+  },
+  {
+      name: "Twitter/X",
+      icon: <Twitter size={22} />,
+      url: "https://x.com/sabirpm_",
+      color: "#1DA1F2"
   },
   {
     name: "LeetCode",
