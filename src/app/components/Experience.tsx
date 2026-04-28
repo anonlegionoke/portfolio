@@ -143,8 +143,12 @@ const Experience = () => {
             <div className="flex items-start justify-center">
               {/* Content card — CSS hover, Framer only for height animation */}
               <div
-                className="cursor-pointer bg-black/20 w-full rounded-xl border border-white/10 p-6 transition-all duration-200 hover:scale-[1.005] hover:shadow-lg hover:shadow-white/5"
-                onClick={() => setExpandedId(expandedId === exp.id ? null : exp.id)}
+                className={`bg-black/20 w-full rounded-xl border border-white/10 p-6 transition-all duration-200 hover:shadow-lg hover:shadow-white/5 ${expandedId === exp.id ? '' : 'cursor-pointer hover:scale-[1.005]'}`}
+                onClick={() => {
+                  if (expandedId !== exp.id) {
+                    setExpandedId(exp.id);
+                  }
+                }}
               >
                 <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
                   <div>
